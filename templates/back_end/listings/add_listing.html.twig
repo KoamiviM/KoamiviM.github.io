@@ -1,0 +1,303 @@
+{% extends 'dashboard_layout.html.twig' %}
+
+{% block page_name %}Add Listing{% endblock %}
+{% block active_page %}Add Listing{% endblock %}
+
+{% block body %}
+    <div class="row bott-wid">
+        <div class="col-md-12 col-sm-12">
+            <div class="card">
+
+                <div class="card-header">
+                    <h4>{% if action == 'edit' %}Modifier{% elseif action == 'add' %}Ajouter{% endif %} une annonce</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class=" col-md-5 col-sm-5">
+                            {% for flashMessage in app.session.flashbag.get('success') %}
+                                <div id="flashbag_msg" class="col-md-12">
+                                    <div class="alert alert-success">{{ flashMessage }}</div>
+                                </div>
+                            {% endfor %}
+                            {% for flashMessage in app.session.flashbag.get('error') %}
+                                <div id="flashbag_msg" class="col-md-12">
+                                    <div class="alert alert-danger">{{ flashMessage }}</div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+
+                    <form class="form-horizontal" method="post" id="listing_form" enctype="multipart/form-data">
+                        {{ form_start(form) }}
+                        <div class="col-md-6 col-sm-6">
+                            <div class="row">
+                                <div class="col-md-5 col-sm-5">
+                                    <div class="form-group">
+                                        <label>Entreprise:</label><br>
+                                        <div>
+                                            {{ form_widget(form.company ) }}
+                                            {{ form_errors(form.company) }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-5 col-sm-5 col-sm-offset-1 col-md-offset-1">
+                                    <div class="form-group">
+                                        <label>Categorie:</label><br>
+                                        <div>
+                                            {{ form_widget(form.category) }}
+                                            {{ form_errors(form.category) }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Titre:</label><br>
+                                <div>
+                                    {{ form_widget(form.title) }}
+                                    {{ form_errors(form.title) }}
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Description:</label><br>
+                                <div>
+                                    {{ form_widget(form.description) }}
+                                    {{ form_errors(form.description) }}
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Tags:</label><br>
+                                <div>
+                                    {{ form_widget(form.tags) }}
+                                    {{ form_errors(form.tags) }}
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Commodités:</label><br>
+                                <div>
+                                    {{ form_widget(form.amenities) }}
+                                    {{ form_errors(form.amenities) }}
+                                </div>
+                            </div>
+
+                            {% if default_category == 1 %}
+                                {% include 'back_end/listings/partials/hebergement_form.html.twig' %}
+                            {% elseif default_category == 2 %}
+                                {% include 'back_end/listings/partials/restauration_form.html.twig' %}
+                            {% endif %}
+
+                            <div class="row">
+                                <div class="col-md-5 col-sm-5">
+                                    <div class="form-group">
+                                        <label>Location:</label><br>
+                                        <div>
+                                            {{ form_widget(form.location) }}
+                                            {{ form_errors(form.location) }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-5 col-sm-5 col-sm-offset-1 col-md-offset-1">
+                                    <div class="form-group">
+                                        <label>Prix:</label><br>
+                                        <div>
+                                            {{ form_widget(form.price) }}
+                                            {{ form_errors(form.price) }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-5 col-sm-5">
+                                    <div class="form-group">
+                                        <label></label>
+                                        <div>
+                                            {{ form_widget(form.is_active) }}
+                                            {{ form_errors(form.is_active) }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-6 col-sm-6">
+                            <div class="form-group col-md-12 col-sm-12">
+                                <label>Image à la une</label><br/>
+                                <div class="col-md-6 col-sm-6">
+                                    {{ form_widget(form.imageFile) }}
+                                    {{ form_errors(form.imageFile) }}
+                                </div>
+                                <div class="col-md-6 col-sm-6 preview-image-cls">
+                                    {% if listing.imageName %}
+                                        <img src="{{ asset('uploads/featured_listing/' ~ listing.imageName) }}" style="display:block;height: 100px; width:auto;"/>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-12 col-sm-12">
+                                <label>Image de gallerie 1</label><br/>
+                                <div class="col-md-6 col-sm-6">
+                                    {{ form_widget(form.imagegroup.file1) }}
+                                    {{ form_errors(form.imagegroup.file1) }}
+                                </div>
+
+                                <div class="col-md-6 col-sm-6 preview-image-cls">
+                                    {% if listing.imagegroup and listing.imagegroup.image1 %}
+                                        <img src="{{ asset('uploads/gallery_listing/' ~ listing.imagegroup.image1) }}" style="display:block;height: 100px; width:auto;"/>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-12 col-sm-12">
+                                <label>Image de gallerie 2</label><br/>
+                                <div class="col-md-6 col-sm-6">
+                                    {{ form_widget(form.imagegroup.file2) }}
+                                    {{ form_errors(form.imagegroup.file2) }}
+                                </div>
+
+                                <div class="col-md-6 col-sm-6 preview-image-cls">
+                                    {% if listing.imagegroup and listing.imagegroup.image2 %}
+                                        <img src="{{ asset('uploads/gallery_listing/' ~ listing.imagegroup.image2) }}" style="display:block;height: 100px; width:auto;"/>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-12 col-sm-12">
+                                <label>Image de gallerie 3</label><br/>
+                                <div class="col-md-6 col-sm-6">
+                                    {{ form_widget(form.imagegroup.file3) }}
+                                    {{ form_errors(form.imagegroup.file3) }}
+                                </div>
+
+                                <div class="col-md-6 col-sm-6 preview-image-cls">
+                                    {% if listing.imagegroup and listing.imagegroup.image3 %}
+                                        <img src="{{ asset('uploads/gallery_listing/' ~ listing.imagegroup.image3) }}" style="display:block;height: 100px; width:auto;"/>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-12 col-sm-12">
+                                <label>Image de gallerie 4</label><br/>
+                                <div class="col-md-6 col-sm-6">
+                                    {{ form_widget(form.imagegroup.file4) }}
+                                    {{ form_errors(form.imagegroup.file4) }}
+                                </div>
+
+                                <div class="col-md-6 col-sm-6 preview-image-cls">
+                                    {% if listing.imagegroup and listing.imagegroup.image4 %}
+                                        <img src="{{ asset('uploads/gallery_listing/' ~ listing.imagegroup.image4) }}" style="display:block;height: 100px; width:auto;"/>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-12 col-sm-12">
+                                <label>Image de gallerie 5</label><br/>
+                                <div class="col-md-6 col-sm-6">
+                                    {{ form_widget(form.imagegroup.file5) }}
+                                    {{ form_errors(form.imagegroup.file5) }}
+                                </div>
+
+                                <div class="col-md-6 col-sm-6 preview-image-cls">
+                                    {% if listing.imagegroup and listing.imagegroup.image5 %}
+                                        <img src="{{ asset('uploads/gallery_listing/' ~ listing.imagegroup.image5) }}" style="display:block;height: 100px; width:auto;"/>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-12 col-sm-12">
+                                <label>Image de gallerie 6</label><br/>
+                                <div class="col-md-6 col-sm-6">
+                                    {{ form_widget(form.imagegroup.file6) }}
+                                    {{ form_errors(form.imagegroup.file6) }}
+                                </div>
+
+                                <div class="col-md-6 col-sm-6 preview-image-cls">
+                                    {% if listing.imagegroup and listing.imagegroup.image6 %}
+                                        <img src="{{ asset('uploads/gallery_listing/' ~ listing.imagegroup.image6) }}" style="display:block;height: 100px; width:auto;"/>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-12 col-sm-12">
+                                <label>Image de gallerie 7</label><br/>
+                                <div class="col-md-6 col-sm-6">
+                                    {{ form_widget(form.imagegroup.file7) }}
+                                    {{ form_errors(form.imagegroup.file7) }}
+                                </div>
+
+                                <div class="col-md-6 col-sm-6 preview-image-cls">
+                                    {% if listing.imagegroup and listing.imagegroup.image7 %}
+                                        <img src="{{ asset('uploads/gallery_listing/' ~ listing.imagegroup.image7) }}" style="display:block;height: 100px; width:auto;"/>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-12 col-sm-12">
+                                <label>Image de gallerie 8</label><br/>
+                                <div class="col-md-6 col-sm-6">
+                                    {{ form_widget(form.imagegroup.file8) }}
+                                    {{ form_errors(form.imagegroup.file8) }}
+                                </div>
+
+                                <div class="col-md-6 col-sm-6 preview-image-cls">
+                                    {% if listing.imagegroup and listing.imagegroup.image8 %}
+                                        <img src="{{ asset('uploads/gallery_listing/' ~ listing.imagegroup.image8) }}" style="display:block;height: 100px; width:auto;"/>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <div class="form-group col-md-12 col-sm-12">
+                                <label>Image de gallerie 9</label><br/>
+                                <div class="col-md-6 col-sm-6">
+                                    {{ form_widget(form.imagegroup.file9) }}
+                                    {{ form_errors(form.imagegroup.file9) }}
+                                </div>
+
+                                <div class="col-md-6 col-sm-6 preview-image-cls">
+                                    {% if listing.imagegroup and listing.imagegroup.image9 %}
+                                        <img src="{{ asset('uploads/gallery_listing/' ~ listing.imagegroup.image9) }}" style="display:block;height: 100px; width:auto;"/>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-12 col-sm-12 text-right">
+                                    <button type="submit" class="btn theme-btn">Sauvegarder</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        {{ form_end(form) }}
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+<script type="application/javascript">
+    $(document).ready(function() {
+        $('.class_select2').select2();
+        $('.select2-container').width("100%");
+    });
+
+    function readUploadedFile(input) {
+        if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            var form_group = $(input).closest('.form-group');
+            $(form_group).find('.preview-image-cls').remove();
+            $(form_group).append('<div class="col-md-6 col-sm-6 preview-image-cls">' +
+            '<img src="'+ e.target.result +'" style="display:block;height: 100px; width:auto;"/></div>');
+        }
+        reader.readAsDataURL(input.files[0]); // convert to base64 string
+    }
+}
+</script>
+{% endblock %}

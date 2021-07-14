@@ -1,0 +1,164 @@
+{% extends 'dashboard_layout.html.twig' %}
+
+
+{% block page_name %}Utilisateurs{% endblock %}
+{% block active_page %}Utilisateurs{% endblock %}
+
+{% block body %}
+    <div class="add-listing-box edit-info mrg-bot-25 padd-bot-30 padd-top-25">
+        <div class="row mrg-r-10 mrg-l-10">
+            <div class="row bott-wid">
+                <div class="col-md-12 col-sm-12">
+                    <div class="card">
+                        <div class="">
+                            <div class="row">
+                                <br>
+                            </div>
+                            <div class="row">
+                                <form method="post">
+                                    {{ form_start(filter_form) }}
+                                    <div class="col-md-9">
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <div class="col-xs-12">
+                                                        {{ form_widget(filter_form.isActive) }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    <div class="col-xs-12">
+                                                        {{ form_widget(filter_form.isLocked) }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <div class="col-xs-12">
+                                                        {{ form_widget(filter_form.roles) }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <div class="col-xs-12">
+                                                        <select name="location" class="form-control">
+                                                            <option  disabled selected> Localisation </option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <div class="form-group">
+                                            <div class="col-xs-8">
+                                                <select name="counter" class="form-control">
+                                                    <option value="10" selected> 10 par page </option>
+                                                    <option value="50"> 50 par page </option>
+                                                </select>
+                                            </div>
+                                            <div class="col-xs-4">
+                                                <input type="submit" class="pull-left btn theme-cl" value="Filter"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {{ form_end(filter_form) }}
+                                </form>
+                            </div>
+                        </div>
+                        <br>
+                        <div class="row">
+                            {% for flashMessage in app.session.flashbag.get('success') %}
+                                <div id="flashbag_msg" class="col-md-12">
+                                    <div class="alert alert-success">{{ flashMessage }}</div>
+                                </div>
+                            {% endfor %}
+                            {% for flashMessage in app.session.flashbag.get('error') %}
+                                <div id="flashbag_msg" class="col-md-12">
+                                    <div class="alert alert-danger">{{ flashMessage }}</div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                        <br>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-striped table-2 table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th style="width: 30%;">Infos utilisateur</th>
+                                        <th>Statut</th>
+                                        <th>Etat</th>
+                                        <th>Creation</th>
+                                        <th>Dernière Conn.</th>
+                                        <th style="width: 10%">Action</th>
+                                    </tr>
+                                    </thead>
+                                    {% for user in users %}
+                                        <tr>
+                                            <td>
+                                                {{ user.firstName }} {{ user.name }} {{ user.organization }}<br>
+                                                {{ user.username }} ({{ user.email }}),<br>
+                                                {{ user.phone }},<br>
+                                                < user locations >
+                                            </td>
+                                            <td>
+                                                {% if user.isactive == true %}
+                                                    <i class="fa fa-circle cl-success font-10 mrg-r-5"></i>Activé
+                                                {% else %}
+                                                    <i class="fa fa-circle cl-danger font-10 mrg-r-5"></i>Non activé
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                {% if user.islocked == true %}
+                                                    <i class="fa fa-circle cl-danger font-10 mrg-r-5"></i>Bloqué
+                                                {% else %}
+                                                    <i class="fa fa-circle cl-success font-10 mrg-r-5"></i>Non bloqué
+                                                {% endif %}
+                                            </td>
+                                            <td>
+                                                {{ user.createdAt |date('d-m-Y h:i:s') }}
+                                            </td>
+                                            <td>
+                                                {{ user.lastConnection |date('d-m-Y h:i:s') }}
+                                            </td>
+                                            <td>
+                                                <a href="{{ path('admin.lock.unlock.user', {id: user.id}) }}">
+                                                {% if user.islocked == true %}
+                                                    <i title="Débloquer" class="fa fa-unlock"></i>
+                                                {% else %}
+                                                    <i title="Bloquer" class="cl-danger fa fa-lock"></i>
+                                                {% endif %}
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                    <tbody>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="card-footer">
+                            <p></p><!-- do not remove -->
+                            <nav aria-label="Page navigation example">
+                                {{ knp_pagination_render(users) }}
+                            </nav>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+<script>
+$( document ).ready(function() {
+    $('select').find('option:empty').remove();
+    $("#flashbag_msg").fadeIn(500).delay(6000).fadeOut(500);
+});
+</script>
+{% endblock %}

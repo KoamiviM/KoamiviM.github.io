@@ -1,0 +1,184 @@
+<div class="sidebar">
+    <!-- Start: Book A Reservation -->
+    <!--div class="widget-boxed">
+        <div class="widget-boxed-header">
+            <h4><i class="ti-calendar padd-r-10"></i>Book A Reservation</h4>
+        </div>
+        <div class="widget-boxed-body">
+            <div class="row">
+                <div class="col-lg-6 col-md-12">
+                    <input type="text" id="reservation-date" data-lang="en" data-large-mode="true" data-large-default="true" data-min-year="2017" data-max-year="2020" data-disabled-days="08/17/2017,08/18/2017" data-id="datedropper-0" data-theme="my-style" class="form-control" readonly="">
+                </div>
+                <div class="col-lg-6 col-md-12">
+                    <input type="text" id="reservation-time" class="form-control" readonly="">
+                </div>
+            </div>
+            <div class="row mrg-top-15">
+                <div class="col-lg-6 col-md-12">
+                    <label>Adult</label>
+                    <div class="input-group">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn counter-btn theme-cl btn-number" disabled="disabled" data-type="minus" data-field="quant[1]">
+                                        <i class="fa fa-minus"></i>
+                                    </button>
+                                </span>
+                        <input type="text" name="quant[1]" class="border-0 text-center form-control input-number" data-min="0" data-max="10" value="0">
+                        <span class="input-group-btn">
+                                     <button type="button" class="btn counter-btn theme-cl btn-number" data-type="plus" data-field="quant[1]">
+                                         <i class="fa fa-plus"></i>
+                                        </button>
+                                </span>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12">
+                    <label>Children</label>
+                    <div class="input-group">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn counter-btn theme-cl btn-number" disabled="disabled" data-type="minus" data-field="quant[2]">
+                                        <i class="fa fa-minus"></i>
+                                    </button>
+                                </span>
+                        <input type="text" name="quant[2]" class="border-0 text-center form-control input-number" data-min="0" data-max="10" value="0">
+                        <span class="input-group-btn">
+                                     <button type="button" class="btn counter-btn theme-cl btn-number" data-type="plus" data-field="quant[2]">
+                                         <i class="fa fa-plus"></i>
+                                        </button>
+                                </span>
+                    </div>
+                </div>
+            </div>
+            <a href="#" class="btn reservation btn-radius theme-btn full-width mrg-top-10">Book Now</a>
+        </div>
+    </div-->
+    <!-- End: Book A Reservation -->
+
+    <!-- Start: Listing Gallery -->
+    {% include 'back_end/listings/partials/gallery.html.twig' %}
+    <!-- End: Listing Gallery -->
+
+    <!-- Start: Listing Location -->
+    <div class="widget-boxed">
+        <div class="widget-boxed-header">
+            <h4><i class="ti-location-pin padd-r-10"></i>Localisation</h4>
+        </div>
+        <div class="widget-boxed-body">
+            <div class="side-list no-border">
+                <ul>
+                    <li>
+                        <i class="ti-location-pin padd-r-10"></i>
+                        {{ listing.location.name }} - {{ listing.location.city.name }}.
+                    </li>
+                    <li>
+                        <i class="ti-mobile padd-r-10"></i>
+                        (+{{ listing.location.country.countryCode }}) {{ listing.location.phone1 }}
+                        {% if listing.location.phone2 %} / {{ listing.location.phone2 }}{% endif %}
+                    </li>
+                    <li>
+                        <i class="ti-email padd-r-10"></i>
+                        {{ listing.location.email }}
+                    </li>
+                    {% if listing.location.website %}
+                        <li>
+                            <i class="ti-world padd-r-10"></i>
+                            {{ listing.location.website }}
+                        </li>
+                    {% endif %}
+                </ul>
+                {% if listing.location.facebookLink or listing.location.instagramLink or listing.location.youtubeLink %}
+                    <h5>Social networks</h5>
+                    <ul class="side-list-inline no-border social-side">
+                        {% if listing.location.facebookLink %}
+                            <li><a target="_blank" href="{{ listing.location.facebookLink }}"><i
+                                            class="fa fa-facebook theme-cl"></i></a></li>
+                        {% endif %}
+                        {% if listing.location.instagramLink %}
+                            <li><a target="_blank" href="{{ listing.location.instagramLink }}"><i
+                                            class="fa fa-instagram theme-cl"></i></a></li>
+                        {% endif %}
+                        {% if listing.location.youtubeLink %}
+                            <li><a target="_blank" href="{{ listing.location.youtubeLink }}"><i
+                                            class="fa fa-youtube theme-cl"></i></a></li>
+                        {% endif %}
+                    </ul>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <!-- End: Listing Location -->
+
+    <!-- Start: Opening hour -->
+    <div class="widget-boxed">
+        <div class="widget-boxed-header">
+            <h4>
+                <a class="collapsed" role="button" data-toggle="collapse" href="#collapseOpeningHours"
+                   aria-expanded="true" aria-controls="collapseOpeningHours">
+                    <i class="ti-time padd-r-10"></i>Horaires
+                </a>
+            </h4>
+        </div>
+        <!-- div id="collapseOpeningHours" role="tabpanel" aria-labelledby="work" class="panel-collapse collapse widget-boxed-body" -->
+        <div id="collapseOpeningHours" role="tabpanel" aria-labelledby="work" class="panel-collapse  widget-boxed-body">
+            <div class="side-list">
+                <ul>
+                    <li>Lundi
+                        <span>
+                                                {% if listing.company.MondayStart == '01:23' %} Fermé
+                                                {% else %}
+                                                    {{ listing.company.MondayStart }} à {{ listing.company.MondayEnd }}
+                                                {% endif %}
+                                            </span>
+                    </li>
+                    <li>Mardi
+                        <span>
+                                                {% if listing.company.TuesdayStart == '01:23' %} Fermé
+                                                {% else %}
+                                                    {{ listing.company.TuesdayStart }} à {{ listing.company.TuesdayEnd }}
+                                                {% endif %}
+                                            </span>
+                    </li>
+                    <li>Mercredi
+                        <span>
+                                                {% if listing.company.WednesdayStart == '01:23' %} Fermé
+                                                {% else %}
+                                                    {{ listing.company.WednesdayStart }} à {{ listing.company.WednesdayEnd }}
+                                                {% endif %}
+                                            </span>
+                    </li>
+                    <li>Jeudi
+                        <span>
+                                                {% if listing.company.ThursdayStart == '01:23' %} Fermé
+                                                {% else %}
+                                                    {{ listing.company.ThursdayStart }} à {{ listing.company.ThursdayEnd }}
+                                                {% endif %}
+                                            </span>
+                    </li>
+                    <li>Vendredi
+                        <span>
+                                                {% if listing.company.FridayStart == '01:23' %} Fermé
+                                                {% else %}
+                                                    {{ listing.company.FridayStart }} à {{ listing.company.FridayEnd }}
+                                                {% endif %}
+                                            </span>
+                    </li>
+                    <li>Samedi
+                        <span>
+                                                {% if listing.company.SaturdayStart == '01:23' %} Fermé
+                                                {% else %}
+                                                    {{ listing.company.SaturdayStart }} à {{ listing.company.SaturdayEnd }}
+                                                {% endif %}
+                                            </span>
+                    </li>
+                    <li>Dimanche
+                        <span>
+                                                {% if listing.company.SundayStart == '01:23' %} Fermé
+                                                {% else %}
+                                                    {{ listing.company.SundayStart }} à {{ listing.company.SundayEnd }}
+                                                {% endif %}
+                                            </span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- End: Opening hour -->
+</div>

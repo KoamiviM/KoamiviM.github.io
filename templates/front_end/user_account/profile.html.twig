@@ -1,0 +1,101 @@
+{% extends 'site_layout.html.twig' %}
+
+{% block body %}
+    <form method="post">
+        {{ form_start(form_profile) }}
+
+        <div class="add-listing-box edit-info mrg-bot-25 padd-bot-30 padd-top-25">
+            <div class="listing-box-header">
+                <h3>{{ user.username }}</h3>
+                <p>{% if is_granted('ROLE_PRO') == true %} {{ user.organization }} {% else %}{{ user.firstname }} {{ user.name }}{% endif %}</p>
+            </div>
+            {% for flashMessage in app.session.flashbag.get('success') %}
+                <div id="flashbag_msg"  style="display: none" class="row mrg-r-10 mrg-l-10">
+                    <div class="alert alert-success">{{ flashMessage }}</div>
+                </div>
+            {% endfor %}
+            {% for flashMessage in app.session.flashbag.get('error') %}
+                <div id="flashbag_msg"  style="display: none" class="row mrg-r-10 mrg-l-10">
+                    <div class="alert alert-danger">{{ flashMessage }}</div>
+                </div>
+            {% endfor %}
+                <div class="row mrg-r-10 mrg-l-10">
+                    {% if is_granted('ROLE_PRO') == true %}
+                        <div class="col-sm-6">
+                            <label>Organization</label>
+                            {{ form_widget(form_profile.organization) }}
+                            {{ form_errors(form_profile.organization) }}
+                        </div>
+                    {% else %}
+                        <div class="col-sm-6">
+                            <label>First name</label>
+                            {{ form_widget(form_profile.name) }}
+                            {{ form_errors(form_profile.name) }}
+                        </div>
+                        <div class="col-sm-6">
+                            <label>Name</label>
+                            {{ form_widget(form_profile.firstName) }}
+                            {{ form_errors(form_profile.firstName) }}
+                        </div>
+                    {% endif %}
+
+                    <div class="col-sm-6">
+                        <label>Username <span style="color: darkred">*</span></label>
+                        {{ form_widget(form_profile.username) }}
+                        {{ form_errors(form_profile.username) }}
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Email</label>
+                        <input type="text" class="form-control" value="{{ user.email }}" disabled>
+                    </div>
+                </div>
+
+        </div>
+
+        <div class="text-center" style="margin-bottom: 50px;">
+            <input type="submit" class="btn theme-btn" value="Update profile"/>
+        </div>
+
+        {{ form_end(form_profile) }}
+
+    </form>
+    <!-- End General Information -->
+
+
+    <!-- Change Password Information -->
+    <form method="post" action="{{ changePassword }}">
+        <div class="add-listing-box opening-day mrg-bot-25 padd-bot-30 padd-top-25">
+            <div class="listing-box-header">
+                <i class="ti-lock theme-cl"></i>
+                <h3>Change Password</h3>
+            </div>
+
+
+            <input type="hidden" value="{{ user.email }}" name="email">
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+            <div class="row mrg-r-10 mrg-l-10">
+                <div class="col-sm-6">
+                    <label>Current Password</label>
+                    <input type="password" name="old_password" class="form-control" placeholder="*********" required>
+                </div>
+
+                <div class="col-sm-6">
+                    <label>New Password</label>
+                    <input type="password" name="new_password" class="form-control" placeholder="*********" required>
+                </div>
+            </div>
+        </div>
+        <div class="text-center" style="margin-bottom: 50px;">
+            <input type="submit" class="btn theme-btn" value="Update password"/>
+        </div>
+    </form>
+{% endblock %}
+
+{% block javascripts %}
+<script type="application/javascript">
+    $(document).ready(function () {
+        $("#flashbag_msg").fadeIn(500).delay(6000).fadeOut(500);
+    });
+</script>
+{% endblock %}

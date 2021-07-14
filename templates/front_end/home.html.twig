@@ -1,0 +1,393 @@
+{% extends 'site_layout.html.twig' %}
+{% block body %}
+
+    <!-- Main Banner Section Start -->
+    <div class="banner dark-opacity" style="background-image:url(http://via.placeholder.com/1920x1000);" data-overlay="8">
+        <div class="container">
+            <div class="banner-caption">
+                <div class="col-md-12 col-sm-12 banner-text">
+                    <h1>Find Nearby Attractions</h1>
+                    <p>Expolore top-rated attractions, activities and more</p>
+                    <form class="form-verticle">
+                        <div class="col-md-4 col-sm-4 no-padd">
+                            <i class="banner-icon icon-pencil"></i>
+                            <input type="text" class="form-control left-radius right-br" placeholder="Keywords..">
+                        </div>
+                        <div class="col-md-3 col-sm-3 no-padd">
+                            <div class="form-box">
+                                <i class="banner-icon icon-map-pin"></i>
+                                <input type="text" class="form-control right-br" placeholder="Location..">
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-3 no-padd">
+                            <div class="form-box">
+                                <i class="banner-icon icon-layers"></i>
+                                <select class="form-control">
+                                    <option data-placeholder="Choose Category" class="chosen-select">Choose Category</option>
+                                    <option value="1">Food & restaurants </option>
+                                    <option value="2">Shop & Education</option>
+                                    <option value="3">Education</option>
+                                    <option value="4">Business</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-2 col-sm-2 no-padd">
+                            <div class="form-box">
+                                <button type="button" class="btn theme-btn btn-default">Search</button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="popular-categories">
+                        <ul class="popular-categories-list">
+
+                            <li>
+                                <a href="#">
+                                    <div class="pc-box">
+                                        <i class="fa fa-plane cl-info"></i>
+                                        <p>Travel</p>
+                                    </div>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#">
+                                    <div class="pc-box">
+                                        <i class="fa fa-paint-brush cl-danger"></i>
+                                        <p>Art & Design</p>
+                                    </div>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#">
+                                    <div class="pc-box">
+                                        <i class="fa fa-file-text cl-warning"></i>
+                                        <p>Documentry</p>
+                                    </div>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#">
+                                    <div class="pc-box">
+                                        <i class="fa fa-glass cl-success"></i>
+                                        <p>Restaurants</p>
+                                    </div>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="#">
+                                    <div class="pc-box">
+                                        <i class="fa fa-briefcase cl-purple"></i>
+                                        <p>Business</p>
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <!-- Main Banner Section End -->
+
+
+    <!-- Listings Section -->
+    <section class="sec-bt">
+        <div class="container">
+
+            <div class="row">
+                <div class="col-md-10 col-md-offset-1">
+                    <div class="heading">
+                        <h2>Top & Popular <span>Listings</span></h2>
+                        <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <!-- Single List -->
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="property_item classical-list">
+                        <div class="image">
+                            <a href="listing-detail.html" class="listing-thumb">
+                                <img src="http://via.placeholder.com/1200x800" alt="latest property" class="img-responsive">
+                            </a>
+                            <div class="listing-price-info">
+                                <span class="pricetag">Featured</span>
+                                <span class="pricetag">$25 - $65</span>
+                            </div>
+                            <a href="#" class="tag_t"><i class="ti-heart"></i>Save</a>
+                            <span class="list-rate good">4.2</span>
+                        </div>
+
+                        <div class="proerty_content">
+                            <div class="author-avater">
+                                <img src="http://via.placeholder.com/120x120" class="author-avater-img" alt="">
+                            </div>
+                            <div class="proerty_text">
+                                <h3 class="captlize"><a href="listing-detail.html">Castle Palace</a><span class="veryfied-author"></span></h3>
+                            </div>
+                            <p class="property_add">Best Marriage Palace in The UK</p>
+                            <div class="property_meta">
+                                <div class="list-fx-features">
+                                    <div class="listing-card-info-icon">
+                                        <span class="inc-fleat inc-add">Seek Velly, CA</span>
+                                    </div>
+                                    <div class="listing-card-info-icon">
+                                        <span class="inc-fleat inc-call">+91 2356 548 958</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="listing-footer-info">
+                            <div class="listing-cat">
+                                <a href="search-listing.html" class="cat-icon cl-1"><i class="ti-briefcase bg-a"></i>Services</a>
+                                <span class="more-cat">+4</span>
+                            </div>
+                            <span class="place-status">Open</span>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Single List -->
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="property_item classical-list">
+                        <div class="image">
+                            <a href="listing-detail.html" class="listing-thumb">
+                                <img src="http://via.placeholder.com/1200x800" alt="latest property" class="img-responsive">
+                            </a>
+                            <div class="listing-price-info">
+                                <span class="pricetag">$20 - $55</span>
+                            </div>
+                            <a href="#" class="tag_t"><i class="ti-heart"></i>Save</a>
+                            <span class="list-rate great">5</span>
+                        </div>
+
+                        <div class="proerty_content">
+                            <div class="author-avater">
+                                <img src="http://via.placeholder.com/120x120" class="author-avater-img" alt="">
+                            </div>
+                            <div class="proerty_text">
+                                <h3 class="captlize"><a href="listing-detail.html">Avenue Mall</a><span class="veryfied-author"></span></h3>
+                            </div>
+                            <p class="property_add">Luxury Shopping Mall in The Austrailia</p>
+                            <div class="property_meta">
+                                <div class="list-fx-features">
+                                    <div class="listing-card-info-icon">
+                                        <span class="inc-fleat inc-add">Seek Velly, CA</span>
+                                    </div>
+                                    <div class="listing-card-info-icon">
+                                        <span class="inc-fleat inc-call">+91 2356 548 958</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="listing-footer-info">
+                            <div class="listing-cat">
+                                <a href="search-listing.html" class="cat-icon cl-1"><i class="ti-shopping-cart-full bg-b"></i>Shoping Mall</a>
+                                <span class="more-cat">+2</span>
+                            </div>
+                            <span class="place-status">Open</span>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Single List -->
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="property_item classical-list">
+                        <div class="image">
+                            <a href="listing-detail.html" class="listing-thumb">
+                                <img src="http://via.placeholder.com/1200x800" alt="latest property" class="img-responsive">
+                            </a>
+                            <div class="listing-price-info">
+                                <span class="pricetag">Featured</span>
+                                <span class="pricetag">$30 - $60</span>
+                            </div>
+                            <a href="#" class="tag_t"><i class="ti-heart"></i>Save</a>
+                            <span class="list-rate medium">3.2</span>
+                        </div>
+
+                        <div class="proerty_content">
+                            <div class="author-avater">
+                                <img src="http://via.placeholder.com/120x120" class="author-avater-img" alt="">
+                            </div>
+                            <div class="proerty_text">
+                                <h3 class="captlize"><a href="listing-detail.html">Beauty Spa</a><span class="veryfied-author"></span></h3>
+                            </div>
+                            <p class="property_add">Fully Spa & Massage Services</p>
+                            <div class="property_meta">
+                                <div class="list-fx-features">
+                                    <div class="listing-card-info-icon">
+                                        <span class="inc-fleat inc-add">Seek Velly, CA</span>
+                                    </div>
+                                    <div class="listing-card-info-icon">
+                                        <span class="inc-fleat inc-call">+91 2356 548 958</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="listing-footer-info">
+                            <div class="listing-cat">
+                                <a href="search-listing.html" class="cat-icon cl-1"><i class="ti-home bg-m"></i>Spa & Massage</a>
+                                <span class="more-cat">+3</span>
+                            </div>
+                            <span class="place-status closed">Closed</span>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Single List -->
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="property_item classical-list">
+                        <div class="image">
+                            <a href="listing-detail.html" class="listing-thumb">
+                                <img src="http://via.placeholder.com/1200x800" alt="latest property" class="img-responsive">
+                            </a>
+                            <div class="listing-price-info">
+                                <span class="pricetag">$25 - $65</span>
+                            </div>
+                            <a href="#" class="tag_t"><i class="ti-heart"></i>Save</a>
+                            <span class="list-rate great">5</span>
+                        </div>
+
+                        <div class="proerty_content">
+                            <div class="author-avater">
+                                <img src="http://via.placeholder.com/120x120" class="author-avater-img" alt="">
+                            </div>
+                            <div class="proerty_text">
+                                <h3 class="captlize"><a href="listing-detail.html">Sweet Restaurants</a><span class="veryfied-author"></span></h3>
+                            </div>
+                            <p class="property_add">Super Clean & Cool Restaurants In Canada</p>
+                            <div class="property_meta">
+                                <div class="list-fx-features">
+                                    <div class="listing-card-info-icon">
+                                        <span class="inc-fleat inc-add">Seek Velly, CA</span>
+                                    </div>
+                                    <div class="listing-card-info-icon">
+                                        <span class="inc-fleat inc-call">+91 2356 548 958</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="listing-footer-info">
+                            <div class="listing-cat">
+                                <a href="search-listing.html" class="cat-icon cl-1"><i class="fa fa-glass bg-d"></i>Eat & Dring</a>
+                                <span class="more-cat">+6</span>
+                            </div>
+                            <span class="place-status">Open</span>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Single List -->
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="property_item classical-list">
+                        <div class="image">
+                            <a href="listing-detail.html" class="listing-thumb">
+                                <img src="http://via.placeholder.com/1200x800" alt="latest property" class="img-responsive">
+                            </a>
+                            <div class="listing-price-info">
+                                <span class="pricetag">$40 - $55</span>
+                            </div>
+                            <a href="#" class="tag_t"><i class="ti-heart"></i>Save</a>
+                            <span class="list-rate poor">2.7</span>
+                        </div>
+
+                        <div class="proerty_content">
+                            <div class="author-avater">
+                                <img src="http://via.placeholder.com/120x120" class="author-avater-img" alt="">
+                            </div>
+                            <div class="proerty_text">
+                                <h3 class="captlize"><a href="listing-detail.html">Veero Events</a><span class="veryfied-author"></span></h3>
+                            </div>
+                            <p class="property_add">Book Veero Management for Your Eventss</p>
+                            <div class="property_meta">
+                                <div class="list-fx-features">
+                                    <div class="listing-card-info-icon">
+                                        <span class="inc-fleat inc-add">Seek Velly, CA</span>
+                                    </div>
+                                    <div class="listing-card-info-icon">
+                                        <span class="inc-fleat inc-call">+91 2356 548 958</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="listing-footer-info">
+                            <div class="listing-cat">
+                                <a href="search-listing.html" class="cat-icon cl-1"><i class="ti-calendar bg-n"></i>Events</a>
+                                <span class="more-cat">+5</span>
+                            </div>
+                            <span class="place-status closed">Closed</span>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Single List -->
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <div class="property_item classical-list">
+                        <div class="image">
+                            <a href="listing-detail.html" class="listing-thumb">
+                                <img src="http://via.placeholder.com/1200x800" alt="latest property" class="img-responsive">
+                            </a>
+                            <div class="listing-price-info">
+                                <span class="pricetag">Featured</span>
+                                <span class="pricetag">$45 - $70</span>
+                            </div>
+                            <a href="#" class="tag_t"><i class="ti-heart"></i>Save</a>
+                            <span class="list-rate good">4.2</span>
+                        </div>
+
+                        <div class="proerty_content">
+                            <div class="author-avater">
+                                <img src="http://via.placeholder.com/120x120" class="author-avater-img" alt="">
+                            </div>
+                            <div class="proerty_text">
+                                <h3 class="captlize"><a href="listing-detail.html">Hilly Salon</a><span class="veryfied-author"></span></h3>
+                            </div>
+                            <p class="property_add">Modern Hair Style Salon In India</p>
+                            <div class="property_meta">
+                                <div class="list-fx-features">
+                                    <div class="listing-card-info-icon">
+                                        <span class="inc-fleat inc-add">Seek Velly, CA</span>
+                                    </div>
+                                    <div class="listing-card-info-icon">
+                                        <span class="inc-fleat inc-call">+91 2356 548 958</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="listing-footer-info">
+                            <div class="listing-cat">
+                                <a href="search-listing.html" class="cat-icon cl-1"><i class="ti-briefcase bg-f"></i>Services</a>
+                                <span class="more-cat">+2</span>
+                            </div>
+                            <span class="place-status">Open</span>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+    <!-- End Listings Section -->
+
+{% endblock %}

@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Vitrine | Preview listing</title>
+
+    <!-- All plugins -->
+    <link href="{{ asset('site-assets/plugins/css/plugins.css') }}" rel="stylesheet">
+
+    <!-- Custom style -->
+    <link href="{{ asset('site-assets/css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('site-assets/css/responsiveness.css') }}" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="{{ asset('site-assets/js/html5shiv.min.js') }}"></script>
+    <script src="{{ asset('site-assets/js/respond.min.js') }}"></script>
+    <![endif]-->
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css" integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ==" crossorigin="" />
+
+</head>
+<body class="home-2">
+<div class="wrapper">
+    <div class="clearfix"></div>
+
+    <!-- ================ Listing Detail Basic Information ======================= -->
+    {% if listing.imageName %}
+        <section class="detail-section" style="background:url({{ vich_uploader_asset(listing, 'imageFile') | imagine_filter('large')}});" data-overlay="6">
+    {% else %}
+        <section class="detail-section" style="background:url(http://via.placeholder.com/1920x850);" data-overlay="6">
+    {% endif %}
+        <div class="overlay" style="background-color: rgb(36, 36, 41); opacity: 0.0;"></div>
+        <div class="profile-cover-content">
+            <div class="container">
+                <div class="cover-buttons">
+                    <ul>
+                        <li>
+                            <div class="buttons medium button-plain ">
+                                <i class="fa fa-phone"></i>
+                                (+{{ listing.location.country.countryCode }}) {{ listing.location.phone1 }}
+                                {% if listing.location.phone2 %} / {{ listing.location.phone2 }}{% endif %}
+                            </div>
+                        </li>
+                        <li>
+                            <div class="buttons medium button-plain ">
+                                <i class="fa fa-map-marker"></i>
+                                {{ listing.location.name }} - {{ listing.location.city.name }}.
+                            </div>
+                        </li>
+                        <li><div class="inside-rating buttons listing-rating theme-btn button-plain"><span class="value">9.7</span> <sup class="out-of">/10</sup></div></li>
+                        <li><a href="#add-review" class="buttons btn-outlined medium add-review"><i class="fa fa-comments-o"></i><span class="hidden-xs">Add review</span></a></li>
+                        <li><a href="#" data-listing-id="74" data-nonce="01a769d424" class="buttons btn-outlined"><i class="fa fa-heart-o"></i><span class="hidden-xs">Bookmark</span> </a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- ================ End Listing Detail Basic Information ======================= -->
+
+    <!-- ================ Listing Detail Full Information ======================= -->
+    <section class="list-detail">
+        <div class="container">
+            <div class="row">
+                <!-- Start: Listing Detail Wrapper -->
+                <div class="col-md-8 col-sm-8">
+                    <div class="detail-wrapper">
+                        <div class="detail-wrapper-body">
+                            <div class="listing-title-bar">
+                                <h3>{{ listing.title }} <span class="mrg-l-5 category-tag">{{ listing.category.title }}</span></h3>
+                                <div>
+                                    <a href="#listing-location" class="listing-address">
+                                        <i class="ti-location-pin mrg-r-5"></i>
+                                        {{ listing.location.name }} - {{ listing.location.city.name }}.
+                                    </a>
+
+                                    <div class="rating-box">
+                                        <div class="detail-list-rating">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                        </div>
+                                        <a href="#" class="detail-rating-count">47 Rating</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="detail-wrapper">
+                        <div class="detail-wrapper-header">
+                            <h4>{{ listing.company.name }}</h4>
+                        </div>
+                        <div class="detail-wrapper-body">
+                            <p>
+                                {{ listing.company.description }}
+                            </p>
+
+                        </div>
+                    </div>
+
+                    {% if listing.company.amenities %}
+                        <div class="detail-wrapper">
+                            <div class="detail-wrapper-header">
+                                <h4>Commodités</h4>
+                            </div>
+                            <div class="detail-wrapper-body">
+                                <ul class="detail-check">
+                                    {% for amenity in listing.company.amenities %}
+                                        <li>{{ amenity.name }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    {% if default_category == '1' %}
+                        {% include 'back_end/listings/partials/hebergement_details.html.twig' %}
+                    {% elseif default_category == '2' %}
+                        {% include 'back_end/listings/partials/restauration_details.html.twig' %}
+                    {% endif %}
+
+                    <div class="detail-wrapper">
+                        <div class="detail-wrapper-header">
+                            <h4>Location</h4>
+                        </div>
+                        <div class="detail-wrapper-body">
+                            <div id="map" class="full-width" style="height:400px;"></div>
+                        </div>
+                    </div>
+
+                    <div class="detail-wrapper">
+                        <div class="detail-wrapper-header">
+                            <h4>Rate & Write Comment</h4>
+                        </div>
+                        <div class="detail-wrapper-body">
+
+                            <div class="row mrg-bot-10">
+                                <div class="col-md-12">
+                                    <div class="rating-opt">
+                                        <div   class="jr-ratenode jr-nomal"></div>
+                                        <div   class="jr-ratenode jr-nomal "></div>
+                                        <div   class="jr-ratenode jr-nomal "></div>
+                                        <div   class="jr-ratenode jr-nomal "></div>
+                                        <div   class="jr-ratenode jr-nomal "></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control" placeholder="Your Name*">
+                                </div>
+                                <div class="col-sm-6">
+                                    <input type="email" class="form-control" placeholder="Email Address*">
+                                </div>
+                                <div class="col-sm-12">
+                                    <textarea class="form-control height-110" placeholder="Tell us your experience..."></textarea>
+                                </div>
+                                <div class="col-sm-12">
+                                    <button type="button" class="btn theme-btn">Submit your review</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="detail-wrapper">
+                        <div class="detail-wrapper-header">
+                            <h4>24 Comments</h4>
+                        </div>
+                        <div class="detail-wrapper-body">
+                            <ul class="review-list">
+                                <li>
+                                    <div class="reviews-box">
+                                        <div class="review-body">
+                                            <div class="review-avatar">
+                                                <img alt="" src="http://via.placeholder.com/80x80" class="avatar avatar-140 photo">
+                                            </div>
+                                            <div class="review-content">
+                                                <div class="review-info">
+                                                    <div class="review-comment">
+                                                        <div class="review-author">
+                                                            Cole Harris
+                                                        </div>
+                                                        <div class="review-comment-stars">
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star empty"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="review-comment-date">
+                                                        <div class="review-date">
+                                                            <span>4 weeks ago</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <p>At Vero Eos Et Accusamus Et Iusto Odio Dignissimos Ducimus Qui Blanditiis Praesentium Voluptatum Deleniti Atque Corrupti Quos Dolores Et Quas Molestias Excepturi Sint Occaecati Cupiditate Non Provident.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <div class="reviews-box">
+                                        <div class="review-body">
+                                            <div class="review-avatar">
+                                                <img alt="" src="http://via.placeholder.com/80x80" class="avatar avatar-140 photo">
+                                            </div>
+                                            <div class="review-content">
+                                                <div class="review-info">
+                                                    <div class="review-comment">
+                                                        <div class="review-author">
+                                                            Mariya Merry
+                                                        </div>
+                                                        <div class="review-comment-stars">
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star empty"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="review-comment-date">
+                                                        <div class="review-date">
+                                                            <span>3 weeks ago</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <p>At Vero Eos Et Accusamus Et Iusto Odio Dignissimos Ducimus Qui Blanditiis Praesentium Voluptatum Deleniti Atque Corrupti Quos Dolores Et Quas Molestias Excepturi Sint Occaecati Cupiditate Non Provident.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+
+                                <li>
+                                    <div class="reviews-box">
+                                        <div class="review-body">
+                                            <div class="review-avatar">
+                                                <img alt="" src="http://via.placeholder.com/80x80" class="avatar avatar-140 photo">
+                                            </div>
+                                            <div class="review-content">
+                                                <div class="review-info">
+                                                    <div class="review-comment">
+                                                        <div class="review-author">
+                                                            Wadden Will
+                                                        </div>
+                                                        <div class="review-comment-stars">
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star"></i>
+                                                            <i class="fa fa-star empty"></i>
+                                                        </div>
+                                                    </div>
+                                                    <div class="review-comment-date">
+                                                        <div class="review-date">
+                                                            <span>5 weeks ago</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <p>At Vero Eos Et Accusamus Et Iusto Odio Dignissimos Ducimus Qui Blanditiis Praesentium Voluptatum Deleniti Atque Corrupti Quos Dolores Et Quas Molestias Excepturi Sint Occaecati Cupiditate Non Provident.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- End: Listing Detail Wrapper -->
+
+                <!-- Sidebar Start -->
+                <div class="col-md-4 col-sm-12">
+                    {% include 'back_end/listings/partials/sidebar.html.twig' %}
+                </div>
+                <!-- End: Sidebar Start -->
+            </div>
+        </div>
+    </section>
+    <!-- ================ Listing Detail Full Information ======================= -->
+
+    <!-- ================ Start Footer ======================= -->
+    <footer class="footer dark-footer dark-bg">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-3 col-sm-6">
+                    <div class="footer-widget">
+                        <h3 class="widgettitle widget-title">About Us</h3>
+                        <p>We are Themez Hub A team of clean, creative & professionals delivering world-class HTML Templates to build a better & smart web.</p>
+                        <a href="#" class="other-store-link">
+                            <div class="other-store-app">
+                                <div class="os-app-icon">
+                                    <i class="ti-android"></i>
+                                </div>
+                                <div class="os-app-caps">
+                                    Google Store
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-6">
+                    <div class="footer-widget">
+                        <h3 class="widgettitle widget-title">Popular Services</h3>
+                        <ul class="footer-navigation sinlge">
+                            <li><a href="#">Home Version One</a></li>
+                            <li><a href="#">Home Version Two</a></li>
+                            <li><a href="#">Home Version Three</a></li>
+                            <li><a href="#">Listing Detail Page</a></li>
+                            <li><a href="#">Search Listing Page</a></li>
+                            <li><a href="#">Our Top Authors</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-6">
+                    <div class="footer-widget">
+                        <div class="textwidget">
+                            <h3 class="widgettitle widget-title">Get In Touch</h3>
+                            <div class="address-box">
+                                <div class="sing-add">
+                                    <i class="ti-location-pin"></i>7744 North, New York
+                                </div>
+                                <div class="sing-add">
+                                    <i class="ti-email"></i>support@listinghub.com
+                                </div>
+                                <div class="sing-add">
+                                    <i class="ti-mobile"></i>+91 021 548 75958
+                                </div>
+                                <div class="sing-add">
+                                    <i class="ti-world"></i>www.themezhub.com
+                                </div>
+                            </div>
+                            <ul class="footer-social">
+                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                                <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-6">
+                    <div class="footer-widget">
+                        <h3 class="widgettitle widget-title">Subscribe Newsletter</h3>
+                        <p>At Vero Eos Et Accusamus Et Iusto Odio Dignissimos Ducimus Qui Blanditiis</p>
+
+                        <form class="sup-form">
+                            <input type="email" class="form-control sigmup-me" placeholder="Your Email Address" required="required">
+                            <button type="submit" class="btn" value="Get Started"><i class="fa fa-location-arrow"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="footer-copyright">
+            <p>Copyright@ 2019 Listing Hub Design By <a href="http://www.themezhub.com/" title="Themezhub" target="_blank">Themezhub</a></p>
+        </div>
+    </footer>
+    <!-- ================ End Footer Section ======================= -->
+
+    <a id="back2Top" class="theme-bg" title="Back to top" href="#"><i class="ti-arrow-up"></i></a>
+
+
+
+    <!-- START JAVASCRIPT -->
+    <script src="{{ asset('site-assets/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('site-assets/plugins/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('site-assets/plugins/js/bootsnav.js') }}"></script>
+    <script src="{{ asset('site-assets/plugins/js/bootstrap-select.min.js') }}"></script>
+    <script src="{{ asset('site-assets/plugins/js/bootstrap-touch-slider-min.js') }}"></script>
+    <script src="{{ asset('site-assets/plugins/js/jquery.touchSwipe.min.js') }}"></script>
+    <script src="{{ asset('site-assets/plugins/js/chosen.jquery.js') }}"></script>
+    <script src="{{ asset('site-assets/plugins/js/datedropper.min.js') }}"></script>
+    <script src="{{ asset('site-assets/plugins/js/dropzone.js') }}"></script>
+    <script src="{{ asset('site-assets/plugins/js/jquery.counterup.min.js') }}"></script>
+    <script src="{{ asset('site-assets/plugins/js/jquery.fancybox.js') }}"></script>
+    <script src="{{ asset('site-assets/plugins/js/jquery.nice-select.js') }}"></script>
+    <script src="{{ asset('site-assets/plugins/js/fastclick.js') }}"></script>
+    <script src="{{ asset('site-assets/plugins/js/jqueryadd-count.js') }}"></script>
+    <script src="{{ asset('site-assets/plugins/js/jquery-rating.js') }}"></script>
+    <script src="{{ asset('site-assets/plugins/js/slick.js') }}"></script>
+    <script src="{{ asset('site-assets/plugins/js/timedropper.js') }}"></script>
+    <script src="{{ asset('site-assets/plugins/js/waypoints.min.js') }}"></script>
+    <script src="{{ asset('site-assets/plugins/js/bootstrap-slider.js') }}"></script>
+
+    <!-- Custom Js -->
+    <script src="{{ asset('site-assets/js/custom.js') }}"></script>
+
+    <script src="https://unpkg.com/leaflet@1.3.1/dist/leaflet.js" integrity="sha512-/Nsx9X4HebavoBvEBuyp3I7od5tA0UzAxs+j83KgC8PU0kgB4XiK4Lfe4y4cgBtaRJQEIFCW+oC506aPT2L1zw==" crossorigin=""></script>
+
+    <script type="text/javascript">
+        // On initialise la latitude et la longitude de Paris (centre de la carte)
+        var lat = {{ listing.location.latitude }};
+        var lon = {{ listing.location.longitude }};
+        var macarte = null;
+        // Fonction d'initialisation de la carte
+        function initMap() {
+            // Créer l'objet "macarte" et l'insèrer dans l'élément HTML qui a l'ID "map"
+            macarte = L.map('map').setView([lat, lon], 17);
+            L.tileLayer('https://{s}.tile.openstreetmap.fr/osmfr/{z}/{x}/{y}.png', {
+                attribution: '&copy; <a target="_blank" href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                minZoom: 1,
+                maxZoom: 20
+            }).addTo(macarte);
+
+            var marker = L.marker([lat, lon]).addTo(macarte);
+            marker.bindPopup('{{ listing.title }} - {{ listing.category.title }}');
+        }
+        window.onload = function(){
+            initMap();
+        };
+    </script>
+
+    <script type="text/javascript">
+        $("[data-fancybox]").fancybox({
+            // Options will go here
+        });
+    </script>
+
+    <!-- Date Dropper Script-->
+    <script>
+        $('#reservation-date').dateDropper();
+    </script>
+
+    <!-- Time Dropper Script-->
+    <script>
+        this.$('#reservation-time').timeDropper({
+            setCurrentTime: false,
+            meridians: true,
+            primaryColor: "#e8212a",
+            borderColor: "#e8212a",
+            minutesInterval: '15'
+        });
+    </script>
+
+    <!-- Rating Script -->
+    <script>
+        $('.rating-opt').start(function(cur){
+            console.log(cur);
+            $('#info').text(cur);
+        });
+    </script>
+
+</div>
+</body>
+</html>

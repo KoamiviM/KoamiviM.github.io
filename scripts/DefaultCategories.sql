@@ -1,0 +1,2 @@
+INSERT INTO default_category(id, name) VALUES(1, 'Hébergement'),(2, 'Restauration'), (3, 'Vie nocturne'), (4, 'Location de véhicules'), (5, 'Entreprise');
+INSERT INTO category(id, title, active,created_at, last_updated_at, parent_id) VALUES(1, 'Commodités pour entreprise', 1, now(), now(), 5);

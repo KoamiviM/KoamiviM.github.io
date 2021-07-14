@@ -1,0 +1,61 @@
+<!-- /. NAV TOP  -->
+<nav class="navbar navbar-side">
+    <div class="sidebar-collapse">
+        <ul class="nav" id="main-menu">
+
+            <li >
+                <a href="{{ path('admin.dashboard') }}"><i class="fa fa-dashboard" aria-hidden="true"></i>Tableau de bord</a>
+            </li>
+
+            <li>
+                <a href="{{ path('admin.categories') }}"><i class="fa fa-caret-square-o-up" aria-hidden="true"></i>Catégories</a>
+            </li>
+
+            <li>
+                <a href="{{ path('admin.amenities') }}"><i class="fa fa-optin-monster" aria-hidden="true"></i>Commodités</a>
+            </li>
+
+            <li>
+                <a href="{{ path('admin.specialities') }}"><i class="fa fa-spoon" aria-hidden="true"></i>Spécialités</a>
+            </li>
+
+            <li>
+                <a href="javascript:void(0)">
+                    <i class="fa fa-street-view" aria-hidden="true"></i>Localisations<span class="fa arrow"></span>
+                </a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="{{ path('admin.locations.countries') }}"><i class="fa fa-location-arrow" aria-hidden="true"></i>Pays</a>
+                    </li>
+                    <li>
+                        <a href="{{ path('admin.locations.cities') }}"><i class="fa fa-address-card" aria-hidden="true"></i>Villes</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="javascript:void(0)"><i class="fa fa-cog" aria-hidden="true"></i>Paramètres <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="#"><i class="fa fa-circle-o-notch" aria-hidden="true"></i>Site Settings</a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-circle-o-notch" aria-hidden="true"></i>Directory Settings</a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="fa fa-circle-o-notch" aria-hidden="true"></i>Payment Settings</a>
+                    </li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="{{ path('admin.users') }}"><i class="fa fa-user-circle" aria-hidden="true"></i>Utilisateurs</a>
+            </li>
+
+            <li class="log-off">
+                <a href="{{ path('app_logout') }}"><i class="fa fa-power-off" aria-hidden="true"></i>Déconnexion</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<!-- /. NAV SIDE  -->

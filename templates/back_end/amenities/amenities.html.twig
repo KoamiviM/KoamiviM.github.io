@@ -1,0 +1,132 @@
+{% extends 'dashboard_layout.html.twig' %}
+
+{% block page_name %}Commodités{% endblock %}
+{% block active_page %}Commodités{% endblock %}
+
+{% block body %}
+    <div class="row bott-wid">
+        <div class="col-md-12 col-sm-12">
+            <div class="card">
+
+                <div class="card-header">
+                    <h4>{% if action == 'edit' %}Modifier{% elseif action == 'add' %}Ajouter{% endif%} une commodité</h4>
+                </div>
+
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 col-sm-6">
+                            <form class="form-horizontal" method="post">
+                                {{ form_start(form) }}
+                                    <div class="form-group">
+                                        <label class="col-md-4 col-sm-5">Catégorie:</label>
+                                        <div class="col-md-8 col-sm-7">
+                                            {{ form_widget(form.category) }}
+                                            {{ form_errors(form.category) }}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label class="col-md-4 col-sm-5">Nom:</label>
+                                        <div class="col-md-8 col-sm-7">
+                                            {{ form_widget(form.name) }}
+                                            {{ form_errors(form.name) }}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-md-12 col-sm-12 text-right">
+                                            <button type="submit" class="btn theme-btn">Sauvegarder</button>
+                                        </div>
+                                    </div>
+
+                                    {{ form_end(form) }}
+                            </form>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            {% for flashMessage in app.session.flashbag.get('success') %}
+                                <div id="flashbag_msg" class="col-md-12">
+                                    <div class="alert alert-success">{{ flashMessage }}</div>
+                                </div>
+                            {% endfor %}
+                            {% for flashMessage in app.session.flashbag.get('error') %}
+                                <div id="flashbag_msg" class="col-md-12">
+                                    <div class="alert alert-danger">{{ flashMessage }}</div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row col-md-12 col-sm-12">
+                        {% if categories %}
+                            <div class="detail-wrapper">
+                                <div class="detail-wrapper-header">
+                                    <h4>Commodités</h4>
+                                </div>
+                                <div class="detail-wrapper-body">
+
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-2 table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th style="width: 20%">Catégorie</th>
+                                                    <th>Commodotés</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% for category in categories %}
+                                                <tr>
+                                                {% if category.amenities|length > 0 %}
+                                                    <td>
+                                                        {{ category.title }}
+                                                    </td>
+                                                    {% if category.amenities|length > 0 %}
+                                                        <td>
+                                                            {% for amenity in category.amenities %}
+                                                                <div style="padding: 10px;" class="col-md-3 col-sm-3">
+                                                                    <div style="width: 100%;">
+                                                                        {{ amenity.name }} &nbsp;
+                                                                        <a class="edit" href="{{ path('admin.amenities.edit', {id : amenity.id }) }}"><i class="fa fa-pencil"></i></a>
+                                                                        <a class="ask_confirm delete" href="{{ path('admin.amenity.delete',{id: amenity.id}) }}"><i class="fa fa-trash"></i></a>
+                                                                    </div>
+                                                                </div>
+                                                            {% endfor %}
+                                                        </td>
+                                                    {% else %}
+                                                        <td> &nbsp; - </td>
+                                                    {% endif %}
+                                                {% endif %}
+                                                </tr>
+                                            {% endfor %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+<script type="application/javascript">
+    $(document).ready(function() {
+        $('.class_select2').select2();
+        $('.select2-container').width("100%");
+
+        $("#flashbag_msg").fadeIn(500).delay(6000).fadeOut(500);
+    });
+
+    $("a.ask_confirm").on("click", function(e) {
+        let link = this;
+        e.preventDefault();
+        if(confirm(" Voulez-vous vraiment supprimer cette commodité? ")){
+        window.location = link.href;
+        }
+    });
+</script>
+{% endblock %}

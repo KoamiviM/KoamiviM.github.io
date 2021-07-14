@@ -1,0 +1,114 @@
+{% extends 'dashboard_layout.html.twig' %}
+
+{% block page_name %}Pays{% endblock %}
+{% block active_page %}Pays{% endblock %}
+
+{% block body %}
+    <div class="row bott-wid">
+        <div class="col-md-12 col-sm-12">
+            <div class="card">
+
+                <div class="card-header">
+                    <h4>{% if action == 'edit' %}Modifier{% elseif action == 'add' %}Ajouter{% endif%} un pays</h4>
+                </div>
+
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-4 col-sm-4">
+                            <form class="form-horizontal" method="post">
+                                {{ form_start(form) }}
+                                <div class="form-group col-md-12 col-sm-12">
+                                    <label>Nom</label><br/>
+                                    <div>
+                                        {{ form_widget(form.name) }}
+                                        {{ form_errors(form.name) }}
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-12 col-sm-12">
+                                    <label>Code pays</label><br/>
+                                    <div>
+                                        {{ form_widget(form.country_code) }}
+                                        {{ form_errors(form.country_code) }}
+                                    </div>
+                                </div>
+
+                                <div class="form-group col-md-12 col-sm-12 text-right">
+                                    <button type="submit" class="btn theme-btn">Sauvegarder</button>
+                                </div>
+
+                                {{ form_end(form) }}
+                            </form>
+
+                            <br>
+
+                            <div class="row">
+                                {% for flashMessage in app.session.flashbag.get('success') %}
+                                    <div id="flashbag_msg" class="col-md-12">
+                                        <div class="alert alert-success">{{ flashMessage }}</div>
+                                    </div>
+                                {% endfor %}
+                                {% for flashMessage in app.session.flashbag.get('error') %}
+                                    <div id="flashbag_msg" class="col-md-12">
+                                        <div class="alert alert-danger">{{ flashMessage }}</div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+
+                        <div class="row col-md-7 col-sm-7 col-md-offset-1 col-sm-offset-1">
+                            {% if countries %}
+                                <div class="detail-wrapper">
+                                    <div class="detail-wrapper-header">
+                                        <h4>Countries</h4>
+                                    </div>
+                                    <div class="detail-wrapper-body">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-2 table-hover">
+                                                <thead>
+                                                <tr>
+                                                    <th>Pays</th>
+                                                    <th>Code pays</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                {% for country in countries %}
+                                                    <tr>
+                                                        <td>{{ country.name }}</td>
+                                                        <td>{{ country.countryCode }}</td>
+                                                        <td class="center">
+                                                            <a href="{{ path('admin.locations.country.edit', { id: country.id }) }}">&nbsp;<i class="fa fa-pencil"></i>&nbsp;</a>
+                                                            <a class="ask_confirm" href="{{ path('admin.locations.delete_country', { id: country.id }) }}">&nbsp;<i class="fa fa-trash"></i>&nbsp;</a>
+                                                        </td>
+                                                    </tr>
+                                                {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascript %}
+<script type="application/javascript">
+    $(document).ready(function() {
+        $("#flashbag_msg").fadeIn(500).delay(6000).fadeOut(500);
+    });
+
+    $("a.ask_confirm").on("click", function(e) {
+    let link = this;
+    e.preventDefault();
+    if(confirm("Do you really want to delete the country ?")){
+    window.location = link.href;
+}
+});
+</script>
+{% endblock %}

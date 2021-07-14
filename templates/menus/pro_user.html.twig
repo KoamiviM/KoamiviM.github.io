@@ -1,0 +1,55 @@
+<!-- /. NAV TOP  -->
+<nav class="navbar navbar-side">
+    <div class="sidebar-collapse">
+        <ul class="nav" id="main-menu">
+
+            <li>
+                <a href="{{ path('pro.dashboard') }}"><i class="fa fa-dashboard" aria-hidden="true"></i>Tableau de bord</a>
+            </li>
+
+            <li>
+                <a href="{{ path('pro.companies') }}"><i class="fa fa-building" aria-hidden="true"></i>Entreprises</a>
+            </li>
+
+            <li>
+                <a href="javascript:void(0)"><i class="fa fa-clone" aria-hidden="true"></i>Gérer annonces <span class="fa arrow"></span></a>
+                <ul class="nav nav-second-level">
+                    <li>
+                        <a href="{{ path('pro.listings') }}"><i class="fa fa-list" aria-hidden="true"></i>Annonces</a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)"> <i class="fa fa-plus" aria-hidden="true"></i>Ajouter </a>
+                        <ul class="nav nav-third-level">
+                            <li>
+                                <a href="{{ path('pro.listing.add',{id : 1}) }}"> <i class="fa fa-home"></i>Hébergement</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('pro.listing.add',{id : 2}) }}"> <i class="fa fa-spoon"></i>Restauration</a>
+                            </li>
+                            <li>
+                                <a href="{{ path('pro.listing.add',{id : 4}) }}"> <i class="fa fa-car"></i>Location voitures</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="#"><i class="fa fa-envelope-open" aria-hidden="true"></i>Messages</a>
+            </li>
+
+            <li>
+                <a href="#"><i class="fa fa-comment" aria-hidden="true"></i>Commentaires</a>
+            </li>
+
+            <li>
+                <a href="{{ path('pro.locations') }}"><i class="fa fa-street-view" aria-hidden="true"></i>Localisations</a>
+            </li>
+
+            <li class="log-off">
+                <a href="{{ path('app_logout') }}"><i class="fa fa-power-off" aria-hidden="true"></i>Déconnexion</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<!-- /. NAV SIDE  -->

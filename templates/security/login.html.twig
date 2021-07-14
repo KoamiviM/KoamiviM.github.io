@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title> Login </title>
+
+    <!-- All plugins -->
+    <link href="{{ asset('site-assets/plugins/css/plugins.css') }}" rel="stylesheet">
+
+    <!-- Custom style -->
+    <link href="{{ asset('site-assets/css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('site-assets/css/responsiveness.css') }}" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="{{ asset('js/html5shiv.min.js') }}"></script>
+    <script src="{{ asset('js/respond.min.js') }}"></script>
+    <![endif]-->
+
+</head>
+<body>
+<div class="wrapper">
+    <!-- Start Login Section -->
+    <section class="log-wrapper">
+        <div class="container">
+            <div class="col-md-6 col-sm-10 col-md-offset-3 col-sm-offset-1">
+                <div class="log-box">
+                    <form method="post">
+                        <h4 class="text-center theme-cl">
+                            Connexion
+                        </h4>
+                        <br/>
+                        {% if error %}
+                            <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                        {% endif %}
+
+                        {% if app.user %}
+                            <div class="mb-3">
+                                Vous êtes connecté en tant que {{ app.user.username }}, <a style="background: none; border: none; color: #005cbf" href="{{ path('app_logout') }}">Déconnexion</a>
+                            </div>
+                        {% endif %}
+
+                        {% for flashMessage in app.session.flashbag.get('success') %}
+                            <div class="col-md-12">
+                                <div class="alert alert-success">{{ flashMessage }}</div>
+                            </div>
+                        {% endfor %}
+
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-envelope theme-cl"></i></span>
+                            <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" required autofocus>
+                        </div>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-lock theme-cl"></i></span>
+                            <input type="password" name="password" id="inputPassword" class="form-control" required>
+
+                            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                        </div>
+                        <div class="text-center"  style="margin-top: 50px;">
+                            <button type="submit" class="btn theme-btn width-100 ">Entrer</button>
+                        </div>
+                    </form>
+
+                    <br/>
+
+                    <div class="row" style="margin-left: 40px; margin-top: 50px;">
+                        <div class="col-sm-6 col-md-6">
+                            <a href="{{ path('forgot_password') }}" style="background: none; border: none; color: #005cbf"> Mot de passe oublié ?</a>
+                        </div>
+                        <div class="col-sm-6 col-md-6">
+                            Ou <a style="background: none; border: none; color: #005cbf" href="{{ register }}">Créer un compte</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- End Login Section -->
+
+    <!-- ================ Start Footer ======================= -->
+    <footer class="footer dark-footer dark-bg">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-3 col-sm-6">
+                    <div class="footer-widget">
+                        <h3 class="widgettitle widget-title">About Us</h3>
+                        <p>We are Themez Hub A team of clean, creative & professionals delivering world-class HTML Templates to build a better & smart web.</p>
+                        <a href="#" class="other-store-link">
+                            <div class="other-store-app">
+                                <div class="os-app-icon">
+                                    <i class="ti-android"></i>
+                                </div>
+                                <div class="os-app-caps">
+                                    Google Store
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-6">
+                    <div class="footer-widget">
+                        <h3 class="widgettitle widget-title">Popular Services</h3>
+                        <ul class="footer-navigation sinlge">
+                            <li><a href="#">Home Version One</a></li>
+                            <li><a href="#">Home Version Two</a></li>
+                            <li><a href="#">Home Version Three</a></li>
+                            <li><a href="#">Listing Detail Page</a></li>
+                            <li><a href="#">Search Listing Page</a></li>
+                            <li><a href="#">Our Top Authors</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-6">
+                    <div class="footer-widget">
+                        <div class="textwidget">
+                            <h3 class="widgettitle widget-title">Get In Touch</h3>
+                            <div class="address-box">
+                                <div class="sing-add">
+                                    <i class="ti-location-pin"></i>7744 North, New York
+                                </div>
+                                <div class="sing-add">
+                                    <i class="ti-email"></i>support@listinghub.com
+                                </div>
+                                <div class="sing-add">
+                                    <i class="ti-mobile"></i>+91 021 548 75958
+                                </div>
+                                <div class="sing-add">
+                                    <i class="ti-world"></i>www.themezhub.com
+                                </div>
+                            </div>
+                            <ul class="footer-social">
+                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                                <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-6">
+                    <div class="footer-widget">
+                        <h3 class="widgettitle widget-title">Subscribe Newsletter</h3>
+                        <p>At Vero Eos Et Accusamus Et Iusto Odio Dignissimos Ducimus Qui Blanditiis</p>
+
+                        <form class="sup-form">
+                            <input type="email" class="form-control sigmup-me" placeholder="Your Email Address" required="required">
+                            <button type="submit" class="btn" value="Get Started"><i class="fa fa-location-arrow"></i></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="footer-copyright">
+            <p>Copyright@ 2019 Listing Hub Design By <a href="http://www.themezhub.com/" title="Themezhub" target="_blank">Themezhub</a></p>
+        </div>
+    </footer>
+    <!-- ================ End Footer Section ======================= -->
+
+    <a id="back2Top" class="theme-bg" title="Back to top" href="#"><i class="ti-arrow-up"></i></a>
+
+    <!-- START JAVASCRIPT -->
+    <script src="{{ asset('site-assets/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('site-assets/plugins/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('site-assets/plugins/js/bootsnav.js') }}"></script>
+    <script src="{{ asset('site-assets/plugins/js/bootstrap-select.min.js') }}"></script>
+    <script src="{{ asset('site-assets/plugins/js/bootstrap-touch-slider-min.js') }}"></script>
+    <script src="{{ asset('site-assets/plugins/js/jquery.touchSwipe.min.js') }}"></script>
+    <script src="{{ asset('site-assets/plugins/js/chosen.jquery.js') }}"></script>
+    <script src="{{ asset('site-assets/plugins/js/datedropper.min.js') }}"></script>
+    <script src="{{ asset('site-assets/plugins/js/dropzone.js') }}"></script>
+    <script src="{{ asset('site-assets/plugins/js/jquery.counterup.min.js') }}"></script>
+    <script src="{{ asset('site-assets/plugins/js/jquery.fancybox.js') }}"></script>
+    <script src="{{ asset('site-assets/plugins/js/jquery.nice-select.js') }}"></script>
+    <script src="{{ asset('site-assets/plugins/js/fastclick.js') }}"></script>
+    <script src="{{ asset('site-assets/plugins/js/jqueryadd-count.js') }}"></script>
+    <script src="{{ asset('site-assets/plugins/js/jquery-rating.js') }}"></script>
+    <script src="{{ asset('site-assets/plugins/js/slick.js') }}"></script>
+    <script src="{{ asset('site-assets/plugins/js/timedropper.js') }}"></script>
+    <script src="{{ asset('site-assets/plugins/js/waypoints.min.js') }}"></script>
+    <script src="{{ asset('site-assets/plugins/js/bootstrap-slider.js') }}"></script>
+
+    <!-- Custom Js -->
+    <script src="{{ asset('site-assets/js/custom.js') }}"></script>
+
+    <script>
+        $(document).ready(function (){
+
+            $('#openmodal').on('click',function (){
+                // $('.custom_width').css('max-width','385');
+                $('#rate_smallModal').modal('show');
+            });
+
+        });
+    </script>
+</div>
+</body>
+</html>

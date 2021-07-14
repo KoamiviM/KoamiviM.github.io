@@ -1,0 +1,41 @@
+<div class="detail-wrapper">
+    <div class="detail-wrapper-header">
+        <h4>Description</h4>
+    </div>
+    <div class="detail-wrapper-body">
+        <p>
+            {{ listing.description }}
+        </p>
+        <br>
+        <div class="row">
+            <div class="col-md-4">
+                <b>Type</b>:
+                {% if listing.roomtype == 'adulte' %} Chambre pour adulte
+                {% elseif listing.rootype == 'enfant' %} Chambre pour enfant
+                {% else %} Chambre pour enfant ou adulte
+                {% endif %}
+            </div>
+            <div class="col-md-4">
+                <b>Nombre de personne(s)</b>: {{ listing.nbpersonnes }}
+            </div>
+            <div class="col-md-4">
+                <b>Prix</b>: {{ listing.price }}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% if listing.amenities %}
+    <div class="detail-wrapper">
+        <div class="detail-wrapper-header">
+            <h4>Confort</h4>
+        </div>
+        <div class="detail-wrapper-body">
+            <ul class="detail-check">
+                {% for amenity in listing.amenities %}
+                    <li>{{ amenity.name }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endif %}

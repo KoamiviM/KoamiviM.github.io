@@ -1,0 +1,35 @@
+{% if listing.specialities %}
+    <div class="detail-wrapper">
+        <div class="detail-wrapper-header">
+            <h4> Description</h4>
+        </div>
+        <div class="detail-wrapper-body">
+            <p>
+                {{ listing.description }}
+            </p>
+            <br>
+            <p>
+                <b>Spécialités</b>:
+                {% for spec in listing.specialities %}
+                    {{ spec.name }}
+                    {% if listing.specialities |last != spec %},{% endif %}
+                {% endfor %}
+            </p>
+        </div>
+    </div>
+{% endif %}
+
+{% if listing.amenities %}
+    <div class="detail-wrapper">
+        <div class="detail-wrapper-header">
+            <h4>Les plus</h4>
+        </div>
+        <div class="detail-wrapper-body">
+            <ul class="detail-check">
+                {% for amenity in listing.amenities %}
+                    <li>{{ amenity.name }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endif %}

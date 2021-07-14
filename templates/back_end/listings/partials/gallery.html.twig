@@ -1,0 +1,158 @@
+{% if listing.imageFile or listing.imagegroup or listing.company.imagegroup or listing.company.imageFile %}
+<div class="widget-boxed">
+    <div class="widget-boxed-header">
+        <h4><i class="ti-gallery padd-r-10"></i>Galerie</h4>
+    </div>
+    <div class="widget-boxed-body">
+        <div class="side-list no-border gallery-box">
+            <ul class="gallery-list">
+                <!-- company images -->
+                {% if listing.company.imageName%}
+                    <li>
+                        <a data-fancybox="gallery" href="{{ vich_uploader_asset(listing.company, 'imageFile') | imagine_filter('gallery_image')}}">
+                            <img src="{{ vich_uploader_asset(listing.company, 'imageFile') | imagine_filter('gallery_placeholder')}}" class="img-responsive" alt="" />
+                        </a>
+                    </li>
+                {% endif %}
+                {% if listing.company.imagegroup.image1%}
+                    <li>
+                        <a data-fancybox="gallery" href="{{ vich_uploader_asset(listing.company.imagegroup, 'file1') | imagine_filter('gallery_image')}}">
+                            <img src="{{ vich_uploader_asset(listing.company.imagegroup, 'file1') | imagine_filter('gallery_placeholder')}}" class="img-responsive" alt="" />
+                        </a>
+                    </li>
+                {% endif %}
+                {% if listing.company.imagegroup.image2%}
+                    <li>
+                        <a data-fancybox="gallery" href="{{ vich_uploader_asset(listing.company.imagegroup, 'file2') | imagine_filter('gallery_image')}}">
+                            <img src="{{ vich_uploader_asset(listing.company.imagegroup, 'file2') | imagine_filter('gallery_placeholder')}}" class="img-responsive" alt="" />
+                        </a>
+                    </li>
+                {% endif %}
+                {% if listing.company.imagegroup.image3%}
+                    <li>
+                        <a data-fancybox="gallery" href="{{ vich_uploader_asset(listing.company.imagegroup, 'file3') | imagine_filter('gallery_image')}}">
+                            <img src="{{ vich_uploader_asset(listing.company.imagegroup, 'file3') | imagine_filter('gallery_placeholder')}}" class="img-responsive" alt="" />
+                        </a>
+                    </li>
+                {% endif %}
+                {% if listing.company.imagegroup.image4%}
+                    <li>
+                        <a data-fancybox="gallery" href="{{ vich_uploader_asset(listing.company.imagegroup, 'file4') | imagine_filter('gallery_image')}}">
+                            <img src="{{ vich_uploader_asset(listing.company.imagegroup, 'file4') | imagine_filter('gallery_placeholder')}}" class="img-responsive" alt="" />
+                        </a>
+                    </li>
+                {% endif %}
+                {% if listing.company.imagegroup.image5%}
+                    <li>
+                        <a data-fancybox="gallery" href="{{ vich_uploader_asset(listing.company.imagegroup, 'file5') | imagine_filter('gallery_image')}}">
+                            <img src="{{ vich_uploader_asset(listing.company.imagegroup, 'file5') | imagine_filter('gallery_placeholder')}}" class="img-responsive" alt="" />
+                        </a>
+                    </li>
+                {% endif %}
+                {% if listing.company.imagegroup.image6%}
+                    <li>
+                        <a data-fancybox="gallery" href="{{ vich_uploader_asset(listing.company.imagegroup, 'file6') | imagine_filter('gallery_image')}}">
+                            <img src="{{ vich_uploader_asset(listing.company.imagegroup, 'file6') | imagine_filter('gallery_placeholder')}}" class="img-responsive" alt="" />
+                        </a>
+                    </li>
+                {% endif %}
+                {% if listing.company.imagegroup.image7%}
+                    <li>
+                        <a data-fancybox="gallery" href="{{ vich_uploader_asset(listing.company.imagegroup, 'file7') | imagine_filter('gallery_image')}}">
+                            <img src="{{ vich_uploader_asset(listing.company.imagegroup, 'file7') | imagine_filter('gallery_placeholder')}}" class="img-responsive" alt="" />
+                        </a>
+                    </li>
+                {% endif %}
+                {% if listing.company.imagegroup.image8%}
+                    <li>
+                        <a data-fancybox="gallery" href="{{ vich_uploader_asset(listing.company.imagegroup, 'file8') | imagine_filter('gallery_image')}}">
+                            <img src="{{ vich_uploader_asset(listing.company.imagegroup, 'file8') | imagine_filter('gallery_placeholder')}}" class="img-responsive" alt="" />
+                        </a>
+                    </li>
+                {% endif %}
+                {% if listing.company.imagegroup.image9%}
+                    <li>
+                        <a data-fancybox="gallery" href="{{ vich_uploader_asset(listing.company.imagegroup, 'file9') | imagine_filter('gallery_image')}}">
+                            <img src="{{ vich_uploader_asset(listing.company.imagegroup, 'file9') | imagine_filter('gallery_placeholder')}}" class="img-responsive" alt="" />
+                        </a>
+                    </li>
+                {% endif %}
+
+                <!-- End company images -->
+
+                {% if listing.imageName%}
+                    <li>
+                        <a data-fancybox="gallery" href="{{ vich_uploader_asset(listing, 'imageFile') | imagine_filter('gallery_image')}}">
+                            <img src="{{ vich_uploader_asset(listing, 'imageFile') | imagine_filter('gallery_placeholder')}}" class="img-responsive" alt="" />
+                        </a>
+                    </li>
+                {% endif %}
+
+                {% if listing.imagegroup.image1%}
+                    <li>
+                        <a data-fancybox="gallery" href="{{ vich_uploader_asset(listing.imagegroup, 'file1') | imagine_filter('gallery_image')}}">
+                            <img src="{{ vich_uploader_asset(listing.imagegroup, 'file1') | imagine_filter('gallery_placeholder')}}" class="img-responsive" alt="" />
+                        </a>
+                    </li>
+                {% endif %}
+                {% if listing.imagegroup.image2%}
+                    <li>
+                        <a data-fancybox="gallery" href="{{ vich_uploader_asset(listing.imagegroup, 'file2') | imagine_filter('gallery_image')}}">
+                            <img src="{{ vich_uploader_asset(listing.imagegroup, 'file2') | imagine_filter('gallery_placeholder')}}" class="img-responsive" alt="" />
+                        </a>
+                    </li>
+                {% endif %}
+                {% if listing.imagegroup.image3%}
+                    <li>
+                        <a data-fancybox="gallery" href="{{ vich_uploader_asset(listing.imagegroup, 'file3') | imagine_filter('gallery_image')}}">
+                            <img src="{{ vich_uploader_asset(listing.imagegroup, 'file3') | imagine_filter('gallery_placeholder')}}" class="img-responsive" alt="" />
+                        </a>
+                    </li>
+                {% endif %}
+                {% if listing.imagegroup.image4%}
+                    <li>
+                        <a data-fancybox="gallery" href="{{ vich_uploader_asset(listing.imagegroup, 'file4') | imagine_filter('gallery_image')}}">
+                            <img src="{{ vich_uploader_asset(listing.imagegroup, 'file4') | imagine_filter('gallery_placeholder')}}" class="img-responsive" alt="" />
+                        </a>
+                    </li>
+                {% endif %}
+                {% if listing.imagegroup.image5%}
+                    <li>
+                        <a data-fancybox="gallery" href="{{ vich_uploader_asset(listing.imagegroup, 'file5') | imagine_filter('gallery_image')}}">
+                            <img src="{{ vich_uploader_asset(listing.imagegroup, 'file5') | imagine_filter('gallery_placeholder')}}" class="img-responsive" alt="" />
+                        </a>
+                    </li>
+                {% endif %}
+                {% if listing.imagegroup.image6%}
+                    <li>
+                        <a data-fancybox="gallery" href="{{ vich_uploader_asset(listing.imagegroup, 'file6') | imagine_filter('gallery_image')}}">
+                            <img src="{{ vich_uploader_asset(listing.imagegroup, 'file6') | imagine_filter('gallery_placeholder')}}" class="img-responsive" alt="" />
+                        </a>
+                    </li>
+                {% endif %}
+                {% if listing.imagegroup.image7%}
+                    <li>
+                        <a data-fancybox="gallery" href="{{ vich_uploader_asset(listing.imagegroup, 'file7') | imagine_filter('gallery_image')}}">
+                            <img src="{{ vich_uploader_asset(listing.imagegroup, 'file7') | imagine_filter('gallery_placeholder')}}" class="img-responsive" alt="" />
+                        </a>
+                    </li>
+                {% endif %}
+                {% if listing.imagegroup.image8%}
+                    <li>
+                        <a data-fancybox="gallery" href="{{ vich_uploader_asset(listing.imagegroup, 'file8') | imagine_filter('gallery_image')}}">
+                            <img src="{{ vich_uploader_asset(listing.imagegroup, 'file8') | imagine_filter('gallery_placeholder')}}" class="img-responsive" alt="" />
+                        </a>
+                    </li>
+                {% endif %}
+                {% if listing.imagegroup.image9%}
+                    <li>
+                        <a data-fancybox="gallery" href="{{ vich_uploader_asset(listing.imagegroup, 'file9') | imagine_filter('gallery_image')}}">
+                            <img src="{{ vich_uploader_asset(listing.imagegroup, 'file9') | imagine_filter('gallery_placeholder')}}" class="img-responsive" alt="" />
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endif %}

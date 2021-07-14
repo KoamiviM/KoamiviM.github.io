@@ -1,0 +1,159 @@
+{% extends 'dashboard_layout.html.twig' %}
+
+{% block page_name %}All Listing{% endblock %}
+{% block active_page %}All Listing{% endblock %}
+
+{% block body %}
+<div class="add-listing-box edit-info mrg-bot-25 padd-bot-30 padd-top-25">
+ <div class="row mrg-r-10 mrg-l-10">
+    <div class="row bott-wid">
+        <div class="col-md-12 col-sm-12">
+            <div class="card">
+                <div class="">
+                    <div class="row">
+                        <br>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <div class="col-xs-12">
+                                            <select class="form-control">
+                                                <option disabled selected> Catégorie </option>
+                                                <option value="housing">Hébergement</option>
+                                                <option value="night">Location de voitures</option>
+                                                <option value="restaurant">Restauration</option>
+                                                <option value="vehicle">Vie nocturne</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-8">
+                                    <div class="form-group">
+                                        <div class="col-xs-12">
+                                            <select class="form-control">
+                                                <option  disabled selected> Localisation </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="full-right search-wrapper">
+                                <input type="search" class="form-control" placeholder="filtrer par mot clé...">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <div class="col-xs-8">
+                                    <select name="counter" class="form-control">
+                                        <option value="10" selected> 10 par page </option>
+                                        <option value="50"> 50 par page </option>
+                                        <option value="-1"> Tout </option>
+                                    </select>
+                                </div>
+                                <div class="col-xs-4">
+                                    <input type="submit" class="pull-left btn theme-cl" value="Filter"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-5 col-sm-5">
+                        {% for flashMessage in app.session.flashbag.get('success') %}
+                            <div id="flashbag_msg" class="col-md-12">
+                                <div class="alert alert-success">{{ flashMessage }}</div>
+                            </div>
+                        {% endfor %}
+                        {% for flashMessage in app.session.flashbag.get('error') %}
+                            <div id="flashbag_msg" class="col-md-12">
+                                <div class="alert alert-danger">{{ flashMessage }}</div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-striped table-2 table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Location</th>
+                                    <th>Status</th>
+                                    <th>Category</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                            {% for listing in listings %}
+                                <tr>
+                                    <td>{{ listing.title }}</td>
+                                    <td>{% if listing.location %}{{ listing.location.name }}{% else %}-{% endif %}</td>
+                                    <td>
+                                        {% if listing.isactive == true %}
+                                            <i class="fa fa-circle cl-success font-10 mrg-r-5"></i>Active
+                                        {% else %}
+                                            <i class="fa fa-circle cl-danger font-10 mrg-r-5"></i>Inactive
+                                        {% endif %}
+                                    </td>
+                                    <td>{% if listing.category %}{{ listing.category.title }}{% else %}-{% endif %}</td>
+                                    <td>
+                                        <a href="{{ path('pro.listing.show', { id: listing.id }) }}" class="cl-success" target="_blank" data-toggle="tooltip" data-original-title="preview">
+                                            <i class="fa fa-eye"></i>&nbsp;
+                                        </a>
+
+                                        {% if listing.isactive == true %}
+                                            <a href="#" class="cl-default" title="" data-toggle="tooltip" data-original-title="deactivate">
+                                                <i class="fa fa-lock"></i>
+                                            </a>
+                                        {% else %}
+                                            <a href="#" class="cl-default" title="" data-toggle="tooltip" data-original-title="activate">
+                                                <i class="fa fa-unlock"></i>
+                                            </a>
+                                        {% endif %}
+
+                                        <a href="{{ path('pro.listing.edit', {id: listing.id}) }}" class="edit" title="" data-toggle="tooltip" data-original-title="edit">
+                                            <i class="fa fa-pencil"></i>
+                                        </a>
+
+                                        <a href="#" class="delete" title="" data-toggle="tooltip" data-original-title="Delete">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="card-footer">
+                    <p></p><!-- do not remove -->
+                    <nav aria-label="Page navigation example">
+                        {{ knp_pagination_render(listings) }}
+                    </nav>
+                </div>
+
+            </div>
+        </div>
+    </div>
+ </div>
+</div>
+{% endblock %}
+
+{% block javascript %}
+<script type="application/javascript">
+    $(document).ready(function() {
+        $('.class_select2').select2();
+        $('.select2-container').width("100%");
+
+        $("#flashbag_msg").fadeIn(500).delay(6000).fadeOut(500);
+    });
+</script>
+{% endblock %}

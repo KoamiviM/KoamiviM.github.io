@@ -1,0 +1,148 @@
+{% extends 'dashboard_layout.html.twig' %}
+
+{% block active_page %}My profile{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="add-job_container">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row no-ext-mrg sm-plix">
+                            <div class="col-sm-6 col-sm-8 col-sm-offset-2 col-md-offset-3">
+                                <div class="main-profile-detail">
+                                    <img src="assets/img/img-2.jpg" alt="" class="img-circle img-responsive">
+                                    <h4>Daisy Duelly</h4>
+                                    <span class="designation">DS Customer Care & Service, Austrailia</span>
+                                    <span class="mail">daisy.dully@higninnovation.com</span>
+                                    <span class="btn btn-default btn-file">
+														Upload Photo <input type="file">
+													</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- / General Information -->
+                <div class="card">
+                    <div class="card-header">
+                        <h4><i class="fa fa-map-marker" aria-hidden="true"></i>Location</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row no-ext-mrg sm-plix">
+                            <div class="col-sm-6">
+                                <h5>City</h5>
+                                <select class="form-control input-lg">
+                                    <option>Select City</option>
+                                    <option>New York</option>
+                                    <option>Phoenix</option>
+                                    <option>India</option>
+                                    <option>Austrailia</option>
+                                    <option>San Diego</option>
+                                </select>
+                            </div>
+                            <div class="col-sm-6">
+                                <h5>State</h5>
+                                <input type="text" class="form-control" placeholder="State">
+                            </div>
+                        </div>
+
+                        <div class="row no-ext-mrg sm-plix">
+                            <div class="col-sm-6">
+                                <h5>Houe & Street</h5>
+                                <input type="text" class="form-control" placeholder="e.g. Street 2580">
+                            </div>
+                            <div class="col-sm-6">
+                                <h5>Zip-Code</h5>
+                                <input type="text" class="form-control" placeholder="e.g. 170025">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- / Location -->
+
+                <div class="card">
+
+                    <div class="card-header">
+                        <h4><i class="fa fa-picture-o" aria-hidden="true"></i>Full Detail</h4>
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="row no-ext-mrg sm-plix">
+                            <div class="col-sm-12">
+                                <textarea class="form-control height-100 textarea" placeholder="Description"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="row no-ext-mrg sm-plix">
+                            <div class="col-sm-4">
+                                <h5>Website</h5>
+                                <input type="text" class="form-control" placeholder="http://yoursite.com">
+                            </div>
+                            <div class="col-sm-4">
+                                <h5>Call</h5>
+                                <input type="text" class="form-control" placeholder="+91 123 456 785">
+                            </div>
+                            <div class="col-sm-4">
+                                <h5>Mail</h5>
+                                <input type="text" class="form-control" placeholder="example@gmail.com">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- / Full Detail -->
+
+                <div class="card">
+
+                    <div class="card-header">
+                        <h4><i class="fa fa-users" aria-hidden="true"></i>Social Profile</h4>
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="row no-ext-mrg sm-plix">
+                            <div class="col-sm-4">
+                                <h5 class="sl-profile"><i class="fa fa-facebook"></i>Facebook</h5>
+                                <input type="text" class="form-control" placeholder="https://facebook.com">
+                            </div>
+                            <div class="col-sm-4">
+                                <h5 class="sl-profile"><i class="fa fa-google-plus"></i>Google Plus</h5>
+                                <input type="text" class="form-control" placeholder="https://plus.google.com">
+                            </div>
+                            <div class="col-sm-4">
+                                <h5 class="sl-profile"><i class="fa fa-twitter"></i>Twitter</h5>
+                                <input type="text" class="form-control" placeholder="https://twitter.com">
+                            </div>
+                        </div>
+
+                        <div class="row no-ext-mrg sm-plix">
+                            <div class="col-sm-4">
+                                <h5 class="sl-profile"><i class="fa fa-linkedin"></i>LinkedIn</h5>
+                                <input type="text" class="form-control" placeholder="https://linkedin.com">
+                            </div>
+                            <div class="col-sm-4">
+                                <h5 class="sl-profile"><i class="fa fa-instagram"></i>Instagram</h5>
+                                <input type="text" class="form-control" placeholder="https://instagram.com">
+                            </div>
+                            <div class="col-sm-4">
+                                <h5 class="sl-profile"><i class="fa fa-pinterest"></i>Pinterest</h5>
+                                <input type="text" class="form-control" placeholder="https://pinterest.com">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!-- / Full Detail -->
+                <div class="card">
+                    <div class="card-body">
+                        <div class="col-md-12 text-center">
+                            <button type="submit" class="btn theme-btn">Save & Update</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

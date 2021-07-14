@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title> Vitrine {% block title %}{% endblock %}</title>
+
+    <!-- All plugins -->
+    <link href="{{ asset('site-assets/plugins/css/plugins.css') }}" rel="stylesheet">
+
+    <!-- Custom style -->
+    <link href="{{ asset('site-assets/css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('site-assets/css/responsiveness.css') }}" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="{{ asset('js/html5shiv.min.js') }}"></script>
+    <script src="{{ asset('js/respond.min.js') }}"></script>
+
+    {% block stylesheets %}{% endblock %}
+    <![endif]-->
+
+</head>
+<body class="home-2">
+    <div class="wrapper">
+        <!-- Start Navigation -->
+        <nav class="navbar navbar-default navbar-fixed navbar-transparent white bootsnav">
+            <div class="container-fluid">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
+                    <i class="ti-align-left"></i>
+                </button>
+
+                <!-- Start Header Navigation -->
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="{{ path('homepage') }}">
+                        <img src="{{ asset('site-assets/img/logo-white.png') }}" class="logo logo-display" alt="">
+                        <img src="{{ asset('site-assets/img/logo.png') }}" class="logo logo-scrolled" alt="">
+                    </a>
+                </div>
+
+                <div class="collapse navbar-collapse" id="navbar-menu">
+                    {% if app.user %}
+                        {% if is_granted('ROLE_USER') == true %}
+                            {#  include 'menus/simple_user.html.twig' #}
+                        {% endif %}
+                    {%  endif %}
+                    <ul class="nav navbar-nav navbar-right">
+                        {% if app.user %}
+                            <li class="no-pd dropdown">
+                                <a href="#" class="addlist"> {{ app.user.username }} </a>
+                                <ul class="dropdown-menu animated navbar-left">
+                                    <li>
+                                        <a
+                                        {% if app.user %}
+                                            {% if is_granted('ROLE_ADMIN') == true %}
+                                                href="{{ path('admin.dashboard') }}"
+                                            {% elseif is_granted('ROLE_PRO') == true %}
+                                                href="{{ path('pro.dashboard') }}"
+                                            {% else %}
+                                                href="{{ path('app.profile') }}"
+                                            {% endif %}
+                                        >
+                                            <i class="fa fa-dashboard"></i> Mon compte
+                                        </a>
+                                        {% endif %}
+
+                                    </li>
+                                    <li><a href="{{ path('app_logout') }}"><i class="fa fa-sign-out"></i> Déconnexion</a></li>
+                                </ul>
+                            </li>
+                        {% else %}
+                            <li>
+                                <a href="{{ path('app_login') }}" class="addlist">
+                                    <i class="ti-user" aria-hidden="true"></i>
+                                    Connexion
+                                </a>
+                            </li>
+                        {% endif %}
+
+                  </ul>
+                </div>
+
+            </div>
+        </nav>
+        <!-- End Navigation -->
+        <div class="clearfix"></div>
+
+        {% block body %}{% endblock %}
+    </div>
+
+    <!-- ================ Start Footer ======================= -->
+    <footer class="footer dark-footer dark-bg">
+        <div class="container">
+            <div class="row">
+
+                <div class="col-md-3 col-sm-6">
+                    <div class="footer-widget">
+                        <h3 class="widgettitle widget-title">About Us</h3>
+                        <p>We are Themez Hub A team of clean, creative & professionals delivering world-class HTML Templates
+                            to build a better & smart web.</p>
+                        <a href="#" class="other-store-link">
+                            <div class="other-store-app">
+                                <div class="os-app-icon">
+                                    <i class="ti-android"></i>
+                                </div>
+                                <div class="os-app-caps">
+                                    Google Store
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-6">
+                    <div class="footer-widget">
+                        <h3 class="widgettitle widget-title">Popular Services</h3>
+                        <ul class="footer-navigation sinlge">
+                            <li><a href="#">Home Version One</a></li>
+                            <li><a href="#">Home Version Two</a></li>
+                            <li><a href="#">Home Version Three</a></li>
+                            <li><a href="#">Listing Detail Page</a></li>
+                            <li><a href="#">Search Listing Page</a></li>
+                            <li><a href="#">Our Top Authors</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-6">
+                    <div class="footer-widget">
+                        <div class="textwidget">
+                            <h3 class="widgettitle widget-title">Get In Touch</h3>
+                            <div class="address-box">
+                                <div class="sing-add">
+                                    <i class="ti-location-pin"></i>7744 North, New York
+                                </div>
+                                <div class="sing-add">
+                                    <i class="ti-email"></i>support@listinghub.com
+                                </div>
+                                <div class="sing-add">
+                                    <i class="ti-mobile"></i>+91 021 548 75958
+                                </div>
+                                <div class="sing-add">
+                                    <i class="ti-world"></i>www.themezhub.com
+                                </div>
+                            </div>
+                            <ul class="footer-social">
+                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                                <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                                <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                                <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3 col-sm-6">
+                    <div class="footer-widget">
+                        <h3 class="widgettitle widget-title">Subscribe Newsletter</h3>
+                        <p>At Vero Eos Et Accusamus Et Iusto Odio Dignissimos Ducimus Qui Blanditiis</p>
+
+                        <form class="sup-form">
+                            <input type="email" class="form-control sigmup-me" placeholder="Your Email Address"
+                                   required="required">
+                            <button type="submit" class="btn" value="Get Started"><i class="fa fa-location-arrow"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="footer-copyright">
+            <p>Copyright@  Vitrine {{ "now"|date("Y") }} - By NumRoad
+            </p>
+        </div>
+    </footer>
+    <!-- ================ End Footer Section ======================= -->
+
+    <!-- ================== Login & Sign Up Window ================== -->
+    <div class="modal fade" id="signin" tabindex="-1" role="dialog" aria-labelledby="myModalLabel2" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modalLabel2">LogIn Your Account</h4>
+                    <button type="button" class="m-close" data-dismiss="modal" aria-label="Close">
+                        <i class="ti-close"></i>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+
+                    <div class="wel-back">
+                        <h2>Welcome <span class="theme-cl">Back!</span></h2>
+                    </div>
+
+                    <form>
+
+                        <div class="form-group">
+                            <label>User Name</label>
+                            <input type="email" class="form-control" placeholder="Username">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" class="form-control" placeholder="*******">
+                        </div>
+
+                        <span class="custom-checkbox d-block">
+                                        <input type="checkbox" id="select1">
+                                        <label for="select1"></label>
+                                        Keep me Signed In
+                                    </span>
+
+                        <div class="center">
+                            <button type="submit" id="login-btn" class="btn btn-midium theme-btn btn-radius width-200">
+                                Login
+                            </button>
+                        </div>
+
+                    </form>
+
+                    <div class="connect-with">
+                        <ul>
+                            <li class="fb-ic"><a href="#"><i class="ti-facebook"></i></a></li>
+                            <li class="gp-ic"><a href="#"><i class="ti-google"></i></a></li>
+                            <li class="tw-ic"><a href="#"><i class="ti-twitter"></i></a></li>
+                        </ul>
+                    </div>
+
+                    <div class="center mrg-top-5">
+                        <div class="bottom-login text-center">Don't have an account</div>
+                        <a href="javascript:void(0)" class="theme-cl" data-toggle="modal" data-dismiss="modal"
+                           data-target="#register">Create An Account</a>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="register" tabindex="-1" role="dialog" aria-labelledby="myModalLabel3" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modalLabel3">Create an Account</h4>
+                    <button type="button" class="m-close" data-dismiss="modal" aria-label="Close">
+                        <i class="ti-close"></i>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+
+                    <div class="wel-back">
+                        <h2>Hi Mate! <span class="theme-cl">How are you?</span></h2>
+                    </div>
+
+                    <form>
+
+                        <div class="form-group">
+                            <label>User Name</label>
+                            <input type="email" class="form-control" placeholder="Username">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Password</label>
+                            <input type="password" class="form-control" placeholder="*******">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Confirm Password</label>
+                            <input type="password" class="form-control" placeholder="*******">
+                        </div>
+
+                        <div class="form-group">
+                            <select class="form-control">
+                                <option data-placeholder="Register as a" class="chosen-select">Register As a</option>
+                                <option value="1">As a Guest</option>
+                                <option value="2">As a Owner</option>
+                            </select>
+                        </div>
+
+                        <span class="custom-checkbox d-block">
+                                        <input type="checkbox" id="select1">
+                                        <label for="select1"></label>
+                                        Keep me Signed In
+                                    </span>
+
+                        <div class="center">
+                            <button type="submit" id="login-btn" class="btn btn-midium theme-btn btn-radius width-200">
+                                Login
+                            </button>
+                        </div>
+
+                    </form>
+
+                    <div class="connect-with">
+                        <ul>
+                            <li class="fb-ic"><a href="#"><i class="ti-facebook"></i></a></li>
+                            <li class="gp-ic"><a href="#"><i class="ti-google"></i></a></li>
+                            <li class="tw-ic"><a href="#"><i class="ti-twitter"></i></a></li>
+                        </ul>
+                    </div>
+
+                    <div class="center mrg-top-5">
+                        <div class="bottom-login text-center">Already have an account?</div>
+                        <a href="javascript:void(0)" class="theme-cl" data-toggle="modal" data-dismiss="modal"
+                           data-target="#signin">Login</a>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- ===================== End Login & Sign Up Window =========================== -->
+
+    <a id="back2Top" class="theme-bg" title="Back to top" href="#"><i class="ti-arrow-up"></i></a>
+
+    <!-- START JAVASCRIPT -->
+    <script src="{{ asset('site-assets/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('site-assets/plugins/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('site-assets/plugins/js/bootsnav.js') }}"></script>
+    <script src="{{ asset('site-assets/plugins/js/bootstrap-select.min.js') }}"></script>
+    <script src="{{ asset('site-assets/plugins/js/bootstrap-touch-slider-min.js') }}"></script>
+    <script src="{{ asset('site-assets/plugins/js/jquery.touchSwipe.min.js') }}"></script>
+    <script src="{{ asset('site-assets/plugins/js/chosen.jquery.js') }}"></script>
+    <script src="{{ asset('site-assets/plugins/js/datedropper.min.js') }}"></script>
+    <script src="{{ asset('site-assets/plugins/js/dropzone.js') }}"></script>
+    <script src="{{ asset('site-assets/plugins/js/jquery.counterup.min.js') }}"></script>
+    <script src="{{ asset('site-assets/plugins/js/jquery.fancybox.js') }}"></script>
+    <script src="{{ asset('site-assets/plugins/js/jquery.nice-select.js') }}"></script>
+    <script src="{{ asset('site-assets/plugins/js/fastclick.js') }}"></script>
+    <script src="{{ asset('site-assets/plugins/js/jqueryadd-count.js') }}"></script>
+    <script src="{{ asset('site-assets/plugins/js/jquery-rating.js') }}"></script>
+    <script src="{{ asset('site-assets/plugins/js/slick.js') }}"></script>
+    <script src="{{ asset('site-assets/plugins/js/timedropper.js') }}"></script>
+    <script src="{{ asset('site-assets/plugins/js/waypoints.min.js') }}"></script>
+    <script src="{{ asset('site-assets/plugins/js/bootstrap-slider.js') }}"></script>
+
+    <!-- Custom Js -->
+    <script src="{{ asset('site-assets/js/custom.js') }}"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('select').niceSelect();
+        });
+    </script>
+    {% block javascripts %}{% endblock %}
+    </div>
+</body>
+</html>
